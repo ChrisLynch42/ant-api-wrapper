@@ -25,21 +25,18 @@ import org.junit.Test;
  * @author chris
  */
 public class AntUtilTest {
-  private String baseDir = "src/test/artifacts";
-  private String tomcatLibExtDir = baseDir + "/servertemplate/liferay/apache-tomcat/lib/ext/";
-  private String providedJarsDir = baseDir + "/maven/provided/jars/";
-  private String templateBaseDir = baseDir + "/servertemplate";
+  private String baseDir = "src/test/artifacts/";
   
   @Test
   public void testCopyAndDeleteTree() {
     Project project = new Project();
     project.setName("Copy unit test.");
     
-    String destDir = tomcatLibExtDir;
-    String sourceDir = providedJarsDir;
+    String destDir = baseDir + "copyDeleteDest/";
+    String sourceDir =  baseDir + "copyDeleteSrc/";
 
-    String filename = destDir + "/esapi-2.1.0.jar";
-    String dirname = destDir + "/esapi";
+    String filename = destDir + "/test.txt";
+    String dirname = destDir + "/test";
 
     new Delete(project).addFileset(destDir, "**/*").execute();
     new Copy(project)
