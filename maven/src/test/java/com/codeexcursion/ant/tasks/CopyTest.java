@@ -5,21 +5,10 @@
  */
 package com.codeexcursion.ant.tasks;
 import com.codeexcursion.ant.TestHelper;
-import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Paths;
-import java.nio.file.attribute.PosixFilePermission;
-import java.util.Set;
 import junit.framework.Assert;
-import com.codeexcursion.ant.tasks.Chmod;
-import com.codeexcursion.ant.tasks.Copy;
-import com.codeexcursion.ant.tasks.Delete;
-import com.codeexcursion.ant.tasks.ExecTask;
-import com.codeexcursion.ant.tasks.Mkdir;
-import org.apache.commons.configuration2.Configuration;
 import org.apache.tools.ant.Project;
-import static org.mockito.Mockito.*;
 import org.junit.Test;
 /**
  *
@@ -56,6 +45,13 @@ public class CopyTest {
     project.setName("Copy/Delete Tree unit test.");
     
     String destDir = TestHelper.BASE_DIR + "copyDeleteDest/";
+    testCopyAndDeleteTree1(project, destDir);
+    testCopyAndDeleteTree2(project, destDir);
+  }  
+  
+  
+  public final static void testCopyAndDeleteTree1(Project project, String destDir) {
+    
     String sourceDir =  TestHelper.TREE_DIR;
 
     String filename = destDir + "/test.txt";
@@ -73,9 +69,12 @@ public class CopyTest {
     Assert.assertTrue("Directory " + subDirname + " should exist.", Files.exists(Paths.get(subDirname)));
     Assert.assertTrue("File " + subFilename + " should exist.", Files.exists(Paths.get(subFilename)));
     
-    new Delete(project).addFileset(destDir, "**/*").execute();
-    Assert.assertFalse("File " + filename + " should not exist.", Files.exists(Paths.get(filename)));
-    Assert.assertFalse("Directory " + dirname + " should not exist.", Files.exists(Paths.get(dirname)));
-  }  
+  }
+
+  public static final void testCopyAndDeleteTree2(Project project, String destDir) {
+    
+    new Delete(project).setDir(destDir).execute();
+    Assert.assertFalse("Directory " + destDir + " should not exist.", Files.exists(Paths.get(destDir)));
+  }    
   
 }
