@@ -47,5 +47,11 @@ public class Delete extends BaseTask {
     task.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));
     return this;
   }
+
+  public Delete setQuiet(boolean isQuiet) {
+    task.setQuiet(isQuiet);
+    return this;
+  }
+
   
 }
