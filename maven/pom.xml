@@ -7,7 +7,7 @@
     <name>Chris Lynch</name>
   </organization>
   <version>1.00.000</version>
-  <artifactId>ikrome-ant-api</artifactId>
+  <artifactId>ant-api-wrapper</artifactId>
   <packaging>jar</packaging>
   
   <properties>
