@@ -7,7 +7,7 @@ package com.codeexcursion.ant.tasks;
 import com.codeexcursion.ant.TestHelper;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.apache.tools.ant.Project;
 import org.junit.Test;
 /**

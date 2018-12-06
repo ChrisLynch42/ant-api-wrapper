@@ -42,6 +42,11 @@ public class Delete extends BaseTask {
     task.setDir(PathsUtil.getFile(targetDir));
     return this;
   }
+
+  public Delete setFile(String file) {
+	    task.setFile(PathsUtil.getFile(file));
+	    return this;
+  }  
   
   public Delete addFileset(String sourceDir, String filenamePattern) {
     task.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));

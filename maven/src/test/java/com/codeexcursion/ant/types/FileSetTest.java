@@ -34,8 +34,6 @@ public class FileSetTest {
     fileSet.setDir(sourceDir);
     fileSet.setIncludes("**/*");
 
-    System.out.println(PathsUtil.getFile(sourceDir).getAbsolutePath());
-
     List<String> files = fileSet.getAntType().stream()
     .filter(Objects::nonNull)
     .map(Resource::getName)
@@ -44,8 +42,6 @@ public class FileSetTest {
 
     Assert.assertTrue("File list should contain test.txt", files.contains("test.txt"));
     Assert.assertTrue("File list should contain test/subTest/test5.txt", files.contains("test/subTest/test5.txt"));
-
-    System.out.println(fileSet.getAntType().toString());
 
   }
 

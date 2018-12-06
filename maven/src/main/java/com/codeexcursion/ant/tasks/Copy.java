@@ -6,6 +6,9 @@
 package com.codeexcursion.ant.tasks;
 
 import com.codeexcursion.ant.util.PathsUtil;
+
+import java.io.File;
+
 import org.apache.tools.ant.Project;
 
 /**
@@ -57,5 +60,11 @@ public class Copy extends BaseTask {
     task.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));
     return this;
   }
+  
+  public Copy setFile(String file) {
+	  task.setFile(PathsUtil.getFile(file));
+	  return this;
+  }
+  
   
 }

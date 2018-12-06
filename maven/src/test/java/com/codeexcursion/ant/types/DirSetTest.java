@@ -34,8 +34,6 @@ public class DirSetTest {
     dirSet.setDir(sourceDir);
     dirSet.setIncludes("**/*");
 
-    System.out.println(PathsUtil.getFile(sourceDir).getAbsolutePath());
-
     List<String> directories = dirSet.getAntType().stream()
     .filter(Objects::nonNull)
     .map(Resource::getName)
@@ -44,9 +42,6 @@ public class DirSetTest {
 
     Assert.assertTrue("Directory list should contain test", directories.contains("test"));
     Assert.assertTrue("Directory list should contain test/subTest", directories.contains("test/subTest"));
-
-    System.out.println(dirSet.getAntType().toString());
-
   }
 
 }
