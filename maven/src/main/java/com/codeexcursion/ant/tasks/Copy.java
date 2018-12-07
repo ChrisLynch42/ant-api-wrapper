@@ -12,57 +12,47 @@ import java.io.File;
 import org.apache.tools.ant.Project;
 
 /**
- *
+ * Defaults to overwrite(true) and setForce(true).
  * @author chris
  */
-public class Copy extends BaseTask {
-  private org.apache.tools.ant.taskdefs.Copy task = new org.apache.tools.ant.taskdefs.Copy();
+public class Copy extends org.apache.tools.ant.taskdefs.Copy {
 
   public Copy(
     Project project
   ) {
-    super(project);
-    task.setProject(project);
-    task.setOverwrite(true);
-    task.setForce(true);
+
+    super.setProject(project);
+    super.setOverwrite(true);
+    super.setForce(true);
   }
 
-  public org.apache.tools.ant.taskdefs.Copy getTask() {
-    return task;
-  }
-  
-  public Copy execute() {
-    task.execute();
-    return this;
-  }
-  
-  public Copy setForce(boolean force) {
-    task.setForce(force);
+  public Copy setForceC(boolean force) {
+  	super.setForce(force);
     return this;
   }
 
-  public Copy setOverwrite(boolean overwrite) {
-    task.setOverwrite(overwrite);
+  public Copy setOverwriteC(boolean overwrite) {
+  	super.setOverwrite(overwrite);
     return this;
   }
 
-  public Copy setFlatten(boolean flatten) {
-    task.setFlatten(flatten);
+  public Copy setFlattenC(boolean flatten) {
+  	super.setFlatten(flatten);
     return this;
   }
   
-  public Copy setToDir(String destDir) {
-    task.setTodir(PathsUtil.getFile(destDir));
+  public Copy setTodirC(String destDir) {
+  	super.setTodir(PathsUtil.getFile(destDir));
     return this;
   }
   
-  public Copy addFileset(String sourceDir, String filenamePattern) {
-    task.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));
+  public Copy addFilesetC(String sourceDir, String filenamePattern) {
+  	super.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));
     return this;
   }
   
-  public Copy setFile(String file) {
-	  task.setFile(PathsUtil.getFile(file));
+  public Copy setFileC(String file) {
+  	super.setFile(PathsUtil.getFile(file));
 	  return this;
   }
   

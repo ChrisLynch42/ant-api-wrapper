@@ -5,6 +5,7 @@
  */
 package com.codeexcursion.ant.tasks;
 
+import java.io.File;
 import java.util.Optional;
 
 import com.codeexcursion.ant.util.PathsUtil;
@@ -15,25 +16,37 @@ import org.apache.tools.ant.Project;
 /**
  *
  * @author chris
+ * 
+ * 
  */
-public class Available extends org.apache.tools.ant.taskdefs.Available {
+public class WaitFor extends org.apache.tools.ant.taskdefs.WaitFor {
 
-  public Available(
+  public WaitFor(
     Project project
   ) {
 	Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
 	super.setProject(project);
   }
 
-  
   /**
    * Encapsulates the parent setMaxWait method.
    * @param time
    * @return
-   */  
-  public Available setFileC(String file) {
-    super.setFile(PathsUtil.getFile(file));
-    return this;
-  }  
+   */
+  public WaitFor setMaxWaitC(long time) {
+	super.setMaxWait(time);
+	return this;
+  }
 
+  /**
+   * Encapsulates the WaitFor setMaxWaitUnit method.
+   * @param time
+   * @return
+   */
+  public WaitFor setMaxWaitUnitC(WaitFor.Unit timeUnit) {
+	super.setMaxWaitUnit(timeUnit);
+	return this;
+  }  
+  
+  
 }

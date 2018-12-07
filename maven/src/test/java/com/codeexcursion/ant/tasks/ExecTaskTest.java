@@ -7,7 +7,7 @@ package com.codeexcursion.ant.tasks;
 import com.codeexcursion.ant.TestHelper;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.apache.tools.ant.Project;
 import org.junit.Test;
 /**
@@ -28,16 +28,16 @@ public class ExecTaskTest {
     }
     
     if(os.toLowerCase().contains("inux")) {
-        new ExecTask(project)
-          .setExecutable("ls")
-          .addArgument("-alrt")
+        new Execute(project)
+          .setExecutableC("ls")
+          .addArgumentC("-alrt")
           .execute();
     }
     
     if(os.toLowerCase().contains("indow")) {
-        new ExecTask(project)
-          .setExecutable("dir")
-          .addArgument("/w")
+        new Execute(project)
+          .setExecutableC("dir")
+          .addArgumentC("/w")
           .execute();
     }
   }

@@ -7,7 +7,7 @@ package com.codeexcursion.ant.tasks;
 import com.codeexcursion.ant.TestHelper;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.apache.tools.ant.Project;
 import org.junit.Test;
 /**
@@ -23,12 +23,12 @@ public class MkDirTest {
     
     String destDir = TestHelper.BASE_DIR + "/iWasMade";
     if(Files.exists(Paths.get(destDir))) {
-      new Delete(project).setQuiet(true).setDir(destDir).execute();
+      new Delete(project).setQuietC(true).setDirC(destDir).execute();
     }
     new Mkdir(project).setDir(destDir).execute();
     Assert.assertTrue("Directory " + destDir + " should exist.", Files.exists(Paths.get(destDir)));
 
-    new Delete(project).setDir(destDir).execute();
+    new Delete(project).setDirC(destDir).execute();
     Assert.assertFalse("Directory " + destDir + " should not exist.", Files.exists(Paths.get(destDir)));
     
   }

@@ -13,7 +13,7 @@ import java.nio.file.LinkOption;
 import java.nio.file.Paths;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.Set;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.apache.tools.ant.Project;
 import org.junit.Test;
 /**
@@ -31,9 +31,9 @@ public class ChmodTest {
     testCopyAndDeleteTree1(project, destDir);
     
     new Chmod(project)
-      .setDir(destDir)
-      .setPerm("u+rwx,g-rwx,o-rwx")
-      .setType("dir")
+      .setDirC(destDir)
+      .setPermC("u+rwx,g-rwx,o-rwx")
+      .setTypeC("dir")
       .execute();
     
     Set<PosixFilePermission> permissions = Files.getPosixFilePermissions(Paths.get(destDir), LinkOption.NOFOLLOW_LINKS);
@@ -50,9 +50,9 @@ public class ChmodTest {
     Assert.assertFalse("Others did have write permission.", permissions.contains(PosixFilePermission.OTHERS_WRITE));    
     
     new Chmod(project)
-      .setDir(destDir)
-      .setPerm("u+rwx,g+rwx,o+rwx")
-      .setType("dir")
+      .setDirC(destDir)
+      .setPermC("u+rwx,g+rwx,o+rwx")
+      .setTypeC("dir")
       .execute();
 
     permissions = Files.getPosixFilePermissions(Paths.get(destDir), LinkOption.NOFOLLOW_LINKS);

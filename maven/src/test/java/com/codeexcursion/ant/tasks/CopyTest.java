@@ -26,9 +26,9 @@ public class CopyTest {
     new Mkdir(project).setDir(destDir).execute();
 
     new Copy(project)
-      .setToDir(destDir)
-      .addFileset(sourceDir, "**/*")
-      .setFlatten(true)
+      .setTodirC(destDir)
+      .addFilesetC(sourceDir, "**/*")
+      .setFlattenC(true)
       .execute();
     
     String filename = destDir + "/test.txt";
@@ -36,7 +36,7 @@ public class CopyTest {
     filename = destDir + "/test4.txt";
     Assert.assertTrue("File " + filename + " should exist.", Files.exists(Paths.get(filename)));
     
-    new Delete(project).setDir(destDir).execute();
+    new Delete(project).setDirC(destDir).execute();
   }
 
   @Test
@@ -59,10 +59,10 @@ public class CopyTest {
     String subDirname = destDir + "/test/subTest";
     String subFilename = subDirname + "/test4.txt";
 
-    new Delete(project).setQuiet(true).addFileset(destDir, "**/*").execute();
+    new Delete(project).setQuietC(true).addFilesetC(destDir, "**/*").execute();
     new Copy(project)
-      .setToDir(destDir)
-      .addFileset(sourceDir, "**/*")
+      .setTodirC(destDir)
+      .addFilesetC(sourceDir, "**/*")
       .execute();
     Assert.assertTrue("File " + filename + " should exist.", Files.exists(Paths.get(filename)));
     Assert.assertTrue("Directory " + dirname + " should exist.", Files.exists(Paths.get(dirname)));
@@ -73,7 +73,7 @@ public class CopyTest {
 
   public static final void testCopyAndDeleteTree2(Project project, String destDir) {
     
-    new Delete(project).setDir(destDir).execute();
+    new Delete(project).setDirC(destDir).execute();
     Assert.assertFalse("Directory " + destDir + " should not exist.", Files.exists(Paths.get(destDir)));
   }    
   

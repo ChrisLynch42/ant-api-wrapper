@@ -11,53 +11,45 @@ import org.apache.tools.ant.taskdefs.ExecuteOn;
 
 /**
  *
+ *Defaults to maxParallel(300) and setForce(true)
+ *
  * @author chris
  */
-public class Chmod extends BaseTask {
-  private org.apache.tools.ant.taskdefs.Chmod task = new org.apache.tools.ant.taskdefs.Chmod();
+public class Chmod extends org.apache.tools.ant.taskdefs.Chmod {
 
   public Chmod(
     Project project
   ) {
-    super(project);
-    task.setProject(project);
-    task.setMaxParallel(300);
-    task.setForce(true);
+    super.setProject(project);
+    super.setMaxParallel(300);
+    super.setForce(true);
   }
 
-  public org.apache.tools.ant.taskdefs.Chmod getTask() {
-    return task;
-  }
   
-  public Chmod execute() {
-    task.execute();
-    return this;
-  }
-  
-  public Chmod setForce(boolean force) {
-    task.setForce(force);
+  public Chmod setForceC(boolean force) {
+    super.setForce(force);
     return this;
   }
 
-  public Chmod setType(String type) {
+  public Chmod setTypeC(String type) {
     ExecuteOn.FileDirBoth enumType = new ExecuteOn.FileDirBoth();
     enumType.setValue(type);    
-    task.setType(enumType);
+    super.setType(enumType);
     return this;
   }
 
-  public Chmod setDir(String targetDir) {
-    task.setDir(PathsUtil.getFile(targetDir));
+  public Chmod setDirC(String targetDir) {
+	super.setDir(PathsUtil.getFile(targetDir));
     return this;
   }
   
-  public Chmod setPerm(String permissions) {
-    task.setPerm(permissions);
+  public Chmod setPermC(String permissions) {
+	super.setPerm(permissions);
     return this;
   }
   
-  public Chmod addFileset(String sourceDir, String filenamePattern) {
-    task.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));;
+  public Chmod addFilesetC(String sourceDir, String filenamePattern) {
+	super.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));;
     return this;
   }
   

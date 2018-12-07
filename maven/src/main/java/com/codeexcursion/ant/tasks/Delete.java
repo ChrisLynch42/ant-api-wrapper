@@ -10,51 +10,41 @@ import com.codeexcursion.ant.util.PathsUtil;
 import org.apache.tools.ant.Project;
 
 /**
+ * Defaults to setIncludeEmptyDirs(true).
  *
  * @author chris
  */
-public class Delete extends BaseTask {
-  private org.apache.tools.ant.taskdefs.Delete task = new org.apache.tools.ant.taskdefs.Delete();
+public class Delete extends org.apache.tools.ant.taskdefs.Delete {
 
   public Delete(
     Project project
   ) {
-    super(project);
-    task.setProject(project);
-    task.setIncludeEmptyDirs(true);
+    super.setProject(project);
+    super.setIncludeEmptyDirs(true);
   }
 
-  public org.apache.tools.ant.taskdefs.Delete getTask() {
-    return task;
-  }
-  
-  public Delete execute() {
-    task.execute();
-    return this;
-  }
-  
-  public Delete setIncludeEmptyDirs(boolean includeEmptyDirs) {
-    task.setIncludeEmptyDirs(includeEmptyDirs);
+  public Delete setIncludeEmptyDirsC(boolean includeEmptyDirs) {
+  	super.setIncludeEmptyDirs(includeEmptyDirs);
     return this;
   }
 
-  public Delete setDir(String targetDir) {
-    task.setDir(PathsUtil.getFile(targetDir));
+  public Delete setDirC(String targetDir) {
+  	super.setDir(PathsUtil.getFile(targetDir));
     return this;
   }
 
-  public Delete setFile(String file) {
-	    task.setFile(PathsUtil.getFile(file));
-	    return this;
+  public Delete setFileC(String file) {
+  	super.setFile(PathsUtil.getFile(file));
+	  return this;
   }  
   
-  public Delete addFileset(String sourceDir, String filenamePattern) {
-    task.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));
+  public Delete addFilesetC(String sourceDir, String filenamePattern) {
+  	super.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));
     return this;
   }
 
-  public Delete setQuiet(boolean isQuiet) {
-    task.setQuiet(isQuiet);
+  public Delete setQuietC(boolean isQuiet) {
+  	super.setQuiet(isQuiet);
     return this;
   }
 

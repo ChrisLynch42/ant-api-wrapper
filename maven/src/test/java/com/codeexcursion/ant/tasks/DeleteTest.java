@@ -33,9 +33,9 @@ public class DeleteTest {
     String destFile = destDir + fileName;
     
     new Mkdir(project).setDir(destDir).execute();
-    new Copy(project).setFile(sourceFile).setToDir(destDir).execute();
+    new Copy(project).setFileC(sourceFile).setTodirC(destDir).execute();
     Assert.assertTrue("Test file doesn't exist.", Files.exists(Paths.get(destFile)));
-    new Delete(project).setFile(destFile).execute();
+    new Delete(project).setFileC(destFile).execute();
 
     Assert.assertFalse("Test file exists when it shouldn't.", Files.exists(Paths.get(destFile)));
   }  

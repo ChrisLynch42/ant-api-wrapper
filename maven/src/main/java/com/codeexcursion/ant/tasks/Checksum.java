@@ -6,49 +6,50 @@
 package com.codeexcursion.ant.tasks;
 
 import com.codeexcursion.ant.util.PathsUtil;
+
+import java.util.Optional;
+
+import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 
 /**
  *
  * @author chris
  */
-public class Checksum extends BaseTask {
-  private org.apache.tools.ant.taskdefs.Checksum task = new org.apache.tools.ant.taskdefs.Checksum();
+public class Checksum extends org.apache.tools.ant.taskdefs.Checksum {
 
   public Checksum(
     Project project
   ) {
-    super(project);
-    task.setProject(project);
-    
+	Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
+    super.setProject(project);    
   }
 
-  public org.apache.tools.ant.taskdefs.Checksum getTask() {
-    return task;
-  }
-  
-  public Checksum execute() {
-    task.execute();
-    return this;
-  }
-  
-  public Checksum setAlgorithm(String algorithm) {
-    task.setAlgorithm(algorithm);
+  /**
+   * Encapsulates the parent setAlgorithm method.
+   * @return this object
+   */    
+  public Checksum setAlgorithmC(String algorithm) {
+    super.setAlgorithm(algorithm);
     return this;
   }
 
-  public Checksum setToDir(String destDir) {
-    task.setTodir(PathsUtil.getFile(destDir));
+  /**
+   * Encapsulates the parent setToDir method.
+   * @return this object
+   */     
+  public Checksum setTodirC(String directory) {
+    super.setTodir(PathsUtil.getFile(directory));
     return this;
   }
   
-  public Checksum setFile(String sourceFile) {
-    task.setFile(PathsUtil.getFile(sourceFile));
+  /**
+   * Encapsulates the parent setFile method.
+   * @return this object
+   */    
+  public Checksum setFileC(String dosiero) {
+    super.setFile(PathsUtil.getFile(dosiero));
     return this;
-  }
-  
-  public boolean eval() {
-	  return task.eval();
   }
   
 }
