@@ -47,4 +47,8 @@ public class Checksum extends BaseTask {
     return this;
   }
   
+  public boolean eval() {
+	  return task.eval();
+  }
+  
 }
