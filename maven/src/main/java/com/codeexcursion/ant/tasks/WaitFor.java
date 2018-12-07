@@ -12,6 +12,7 @@ import com.codeexcursion.ant.util.PathsUtil;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
+import org.apache.tools.ant.taskdefs.condition.Condition;
 
 /**
  *
@@ -24,8 +25,8 @@ public class WaitFor extends org.apache.tools.ant.taskdefs.WaitFor {
   public WaitFor(
     Project project
   ) {
-	Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
-	super.setProject(project);
+		Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
+		super.setProject(project);
   }
 
   /**
@@ -34,8 +35,8 @@ public class WaitFor extends org.apache.tools.ant.taskdefs.WaitFor {
    * @return
    */
   public WaitFor setMaxWaitC(long time) {
-	super.setMaxWait(time);
-	return this;
+		super.setMaxWait(time);
+		return this;
   }
 
   /**
@@ -44,9 +45,18 @@ public class WaitFor extends org.apache.tools.ant.taskdefs.WaitFor {
    * @return
    */
   public WaitFor setMaxWaitUnitC(WaitFor.Unit timeUnit) {
-	super.setMaxWaitUnit(timeUnit);
-	return this;
+		super.setMaxWaitUnit(timeUnit);
+		return this;
   }  
   
+  /**
+   * Encapsulates the WaitFor setMaxWaitUnit method.
+   * @param time
+   * @return
+   */
+  public WaitFor addC(Condition condition) {
+		super.add(condition);
+		return this;
+  }    
   
 }
