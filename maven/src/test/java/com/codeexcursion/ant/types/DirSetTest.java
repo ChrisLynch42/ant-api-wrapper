@@ -31,10 +31,9 @@ public class DirSetTest {
 
     String sourceDir = TestHelper.TREE_DIR;
 
-    dirSet.setDir(sourceDir);
-    dirSet.setIncludes("**/*");
+    dirSet.setDirC(sourceDir).setIncludesC("**/*");
 
-    List<String> directories = dirSet.getAntType().stream()
+    List<String> directories = dirSet.stream()
     .filter(Objects::nonNull)
     .map(Resource::getName)
     .peek(System.out::println)

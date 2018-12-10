@@ -12,31 +12,41 @@ import org.apache.tools.ant.Project;
  *
  * @author chris
  */
-public class DirSet {
-    private org.apache.tools.ant.types.DirSet dirSet = new org.apache.tools.ant.types.DirSet();
+public class DirSet extends org.apache.tools.ant.types.DirSet {
     
     public DirSet(Project project) {
-        dirSet.setProject(project);
+        super.setProject(project);
     }
     
-    
-    public DirSet setDir(String dir) {
-        dirSet.setDir(PathsUtil.getFile(dir));
-        return this;
+    /**
+     * Encapsulates the parent setDir method.
+     * @param dir - base directory.
+     * @return this object
+     */     
+    public DirSet setDirC(String dir) {
+    	super.setDir(PathsUtil.getFile(dir));
+      return this;
+    }
+        
+    /**
+     * Encapsulates the parent setIncludes method.
+     * @param includes - directory/file include pattern.
+     * @return this object
+     */     
+    public DirSet setIncludesC(java.lang.String includes) {
+    	super.setIncludes(includes);
+      return this;
     }
     
-    public DirSet setIncludes(java.lang.String includes) {
-        dirSet.setIncludes(includes);
-        return this;
+    /**
+     * Encapsulates the parent setExcludes method.
+     * @param excludes - directory/file include pattern.
+     * @return this object
+     */     
+    public DirSet setExcludesC(java.lang.String excludes) {
+    	super.setExcludes(excludes);
+      return this;
     }
     
-    public DirSet setExcludes(java.lang.String excludes) {
-        dirSet.setIncludes(excludes);
-        return this;
-    }
-    
-    public org.apache.tools.ant.types.DirSet getAntType() {
-        return dirSet;
-    }
     
 }
