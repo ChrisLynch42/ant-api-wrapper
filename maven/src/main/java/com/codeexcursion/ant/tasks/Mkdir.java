@@ -13,28 +13,23 @@ import org.apache.tools.ant.Project;
  *
  * @author chris
  */
-public class Mkdir extends BaseTask {
-  private org.apache.tools.ant.taskdefs.Mkdir task = new org.apache.tools.ant.taskdefs.Mkdir();
+public class Mkdir extends org.apache.tools.ant.taskdefs.Mkdir {
 
   public Mkdir(
     Project project
   ) {
-    super(project);
-    task.setProject(project);
+    super.setProject(project);
+
   }
 
-  public org.apache.tools.ant.taskdefs.Mkdir getTask() {
-    return task;
-  }
   
-  public Mkdir execute() {
-    task.execute();
-    return this;
-  }
-  
-  
-  public Mkdir setDir(String newDir) {
-    task.setDir(PathsUtil.getFile(newDir));
+  /**
+   * Encapsulates the parent setDir method.
+   * @param newDir - directory to be created.
+   * @return this object
+   */     
+  public Mkdir setDirC(String newDir) {
+    super.setDir(PathsUtil.getFile(newDir));
     return this;
   }
 }

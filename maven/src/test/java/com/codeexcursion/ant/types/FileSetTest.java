@@ -31,10 +31,10 @@ public class FileSetTest {
 
     String sourceDir = TestHelper.TREE_DIR;
 
-    fileSet.setDir(sourceDir);
-    fileSet.setIncludes("**/*");
+    fileSet.setDirC(sourceDir);
+    fileSet.setIncludesC("**/*");
 
-    List<String> files = fileSet.getAntType().stream()
+    List<String> files = fileSet.stream()
     .filter(Objects::nonNull)
     .map(Resource::getName)
     .peek(System.out::println)

@@ -44,8 +44,10 @@ public class WaitFor extends org.apache.tools.ant.taskdefs.WaitFor {
    * @param time
    * @return
    */
-  public WaitFor setMaxWaitUnitC(WaitFor.Unit timeUnit) {
-		super.setMaxWaitUnit(timeUnit);
+  public WaitFor setMaxWaitUnitC(String timeUnit) {
+  	WaitFor.Unit unit = new WaitFor.Unit();
+  	unit.setValue(timeUnit);
+		super.setMaxWaitUnit(unit);
 		return this;
   }  
   

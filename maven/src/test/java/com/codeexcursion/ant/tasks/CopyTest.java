@@ -23,7 +23,7 @@ public class CopyTest {
     
     String destDir = TestHelper.BASE_DIR + "copyDeleteDest/";
     String sourceDir =  TestHelper.TREE_DIR;
-    new Mkdir(project).setDir(destDir).execute();
+    new Mkdir(project).setDirC(destDir).execute();
 
     new Copy(project)
       .setTodirC(destDir)

@@ -32,7 +32,7 @@ public class DeleteTest {
     String sourceFile = "src/test/artifacts/treeSrc/" + fileName;
     String destFile = destDir + fileName;
     
-    new Mkdir(project).setDir(destDir).execute();
+    new Mkdir(project).setDirC(destDir).execute();
     new Copy(project).setFileC(sourceFile).setTodirC(destDir).execute();
     Assert.assertTrue("Test file doesn't exist.", Files.exists(Paths.get(destFile)));
     new Delete(project).setFileC(destFile).execute();

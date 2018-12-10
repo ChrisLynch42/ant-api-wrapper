@@ -12,37 +12,32 @@ import org.apache.tools.ant.Project;
  *
  * @author chris
  */
-public class FileSet {
-    private org.apache.tools.ant.types.FileSet fileSet = new org.apache.tools.ant.types.FileSet();
+public class FileSet extends org.apache.tools.ant.types.FileSet {
     
     public FileSet(Project project) {
-        fileSet.setProject(project);
+        super.setProject(project);
     }
     
     
-    public FileSet setDir(String dir) {
-        fileSet.setDir(PathsUtil.getFile(dir));
-        return this;
+    public FileSet setDirC(String dir) {
+    	super.setDir(PathsUtil.getFile(dir));
+      return this;
     }
 
-    public FileSet setFile(String file) {
-        fileSet.setDir(PathsUtil.getFile(file));
-        return this;
+    public FileSet setFileC(String file) {
+    	super.setDir(PathsUtil.getFile(file));
+      return this;
     }
     
     
-    public FileSet setIncludes(java.lang.String includes) {
-        fileSet.setIncludes(includes);
-        return this;
+    public FileSet setIncludesC(java.lang.String includes) {
+    	super.setIncludes(includes);
+      return this;
     }
     
-    public FileSet setExcludes(java.lang.String excludes) {
-        fileSet.setIncludes(excludes);
-        return this;
-    }
-    
-    public org.apache.tools.ant.types.FileSet getAntType() {
-        return fileSet;
+    public FileSet setExcludesC(java.lang.String excludes) {
+    	super.setIncludes(excludes);
+      return this;
     }
     
 }

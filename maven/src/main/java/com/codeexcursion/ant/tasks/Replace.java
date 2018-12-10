@@ -12,37 +12,25 @@ import org.apache.tools.ant.Project;
  *
  * @author chris
  */
-public class Replace extends BaseTask {
-  private org.apache.tools.ant.taskdefs.Replace task = new org.apache.tools.ant.taskdefs.Replace();
-
+public class Replace extends org.apache.tools.ant.taskdefs.Replace {
   public Replace(
     Project project
   ) {
-    super(project);
-    task.setProject(project);
+    super.setProject(project);
   }
 
-  public org.apache.tools.ant.taskdefs.Replace getTask() {
-    return task;
-  }
-  
-  public Replace execute() {
-    task.execute();
-    return this;
-  }
-  
-  public Replace setToken(String token) {
-    task.setToken(token);
+  public Replace setTokenC(String token) {
+  	super.setToken(token);
     return this;
   }
 
-  public Replace setValue(String value) {
-    task.setValue(value);
+  public Replace setValueC(String value) {
+  	super.setValue(value);
     return this;
   }
 
-  public Replace setFile(String targetFile) {
-    task.setFile(PathsUtil.getFile(targetFile));
+  public Replace setFileC(String targetFile) {
+  	super.setFile(PathsUtil.getFile(targetFile));
     return this;
   }
   
