@@ -14,7 +14,7 @@ import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 
 /**
- *
+ * Counts files in a directory.
  * @author chris
  */
 public class FileCount {
@@ -40,6 +40,11 @@ public class FileCount {
     return this;
   }
 
+  /**
+   * Encapsulates the parent setDir method.
+   * @param targetDir - Directory to be deleted.
+   * @return this object
+   */    
   public FileCount setDir(String targetDir) {
     if (targetDir == null) {
       throw new IllegalArgumentException("Directory may not be null.");

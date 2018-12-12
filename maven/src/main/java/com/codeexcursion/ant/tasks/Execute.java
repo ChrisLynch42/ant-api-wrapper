@@ -13,7 +13,7 @@ import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 
 /**
- *
+ * Defaults to setFailOnError(true), setSpawn(false) and setLogError(true).
  * @author chris
  */
 public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {

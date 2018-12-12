@@ -25,12 +25,21 @@ public class Chmod extends org.apache.tools.ant.taskdefs.Chmod {
     super.setForce(true);
   }
 
-  
+  /**
+   * Encapsulates the parent setForce method.
+   * @param force
+   * @return this object
+   */      
   public Chmod setForceC(boolean force) {
     super.setForce(force);
     return this;
   }
 
+  /**
+   * Encapsulates the parent setType method.
+   * @param type - Represents the type of resource to change.
+   * @return this object
+   */   
   public Chmod setTypeC(String type) {
     ExecuteOn.FileDirBoth enumType = new ExecuteOn.FileDirBoth();
     enumType.setValue(type);    
@@ -38,16 +47,32 @@ public class Chmod extends org.apache.tools.ant.taskdefs.Chmod {
     return this;
   }
 
+  /**
+   * Encapsulates the parent setDir method.
+   * @param targetDir - Directory of which to change permissions.
+   * @return this object
+   */     
   public Chmod setDirC(String targetDir) {
-	super.setDir(PathsUtil.getFile(targetDir));
+  	super.setDir(PathsUtil.getFile(targetDir));
     return this;
   }
   
+  /**
+   * Encapsulates the parent setPerm method.
+   * @param permissions - Representation of the permissions to change.
+   * @return this object
+   */   
   public Chmod setPermC(String permissions) {
-	super.setPerm(permissions);
+  	super.setPerm(permissions);
     return this;
   }
   
+  /**
+   * Encapsulates the parent addFileset method.
+   * @param sourceDir - The parent directory of files which are to be changed.
+   * @param filenamePattern - Pattern to be used to select files in sourceDir.
+   * @return this object
+   */     
   public Chmod addFilesetC(String sourceDir, String filenamePattern) {
 	super.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));;
     return this;
