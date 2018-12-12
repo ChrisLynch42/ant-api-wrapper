@@ -13,37 +13,26 @@ import org.apache.tools.ant.types.selectors.FilenameSelector;
  *
  * @author chris
  */
-public class FixCRLF extends BaseTask {
-	private org.apache.tools.ant.taskdefs.FixCRLF task = new org.apache.tools.ant.taskdefs.FixCRLF();
+public class FixCRLF extends org.apache.tools.ant.taskdefs.FixCRLF {
 
 	public FixCRLF(Project project) {
-		super(project);
-		task.setProject(project);
-	}
-
-	public org.apache.tools.ant.taskdefs.FixCRLF getTask() {
-		return task;
-	}
-
-	public FixCRLF execute() {
-		task.execute();
-		return this;
+		super.setProject(project);
 	}
 
 	public FixCRLF setDestdir(String destDir) {
-		task.setDestdir(PathsUtil.getFile(destDir));
+		super.setDestdir(PathsUtil.getFile(destDir));
 		return this;
 	}
 
 	public FixCRLF addFilename(String filenamePattern) {
 		FilenameSelector filenameSelector = new FilenameSelector();
 		filenameSelector.setName(filenamePattern);
-		task.addFilename(filenameSelector);
+		super.addFilename(filenameSelector);
 		return this;
 	}
 
 	public FixCRLF setSrcdir(String sourceDir) {
-		task.setSrcdir(PathsUtil.getFile(sourceDir));
+		super.setSrcdir(PathsUtil.getFile(sourceDir));
 		return this;
 	}
 
@@ -51,7 +40,7 @@ public class FixCRLF extends BaseTask {
 		org.apache.tools.ant.taskdefs.FixCRLF.CrLf lineEnding = 
 				new org.apache.tools.ant.taskdefs.FixCRLF.CrLf();
 		lineEnding.setValue(eol);
-		task.setEol(lineEnding);
+		super.setEol(lineEnding);
 		return this;
 	}
 	

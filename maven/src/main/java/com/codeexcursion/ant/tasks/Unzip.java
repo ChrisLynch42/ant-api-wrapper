@@ -10,46 +10,35 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Expand;
 
 /**
- *
+ * Defaults to setOverwrite(true).
  * @author chris
  */
-public class Unzip extends BaseTask {
-  private org.apache.tools.ant.taskdefs.Expand task = new org.apache.tools.ant.taskdefs.Expand();
+public class Unzip extends org.apache.tools.ant.taskdefs.Expand {
 
   public Unzip(
     Project project
   ) {
-    super(project);
-    task.setProject(project);
-    task.setOverwrite(true);
+    super.setProject(project);
+    super.setOverwrite(true);
   }
 
-  public org.apache.tools.ant.taskdefs.Expand getTask() {
-    return task;
-  }
-  
-  public Unzip execute() {
-    task.execute();
-    return this;
-  }
-  
-  public Unzip setOverwrite(boolean overwrite) {
-    task.setOverwrite(overwrite);
+  public Unzip setOverwriteC(boolean overwrite) {
+  	super.setOverwrite(overwrite);
     return this;
   }
 
-  public Unzip setDest(String destDir) {
-    task.setDest(PathsUtil.getFile(destDir));
+  public Unzip setDestC(String destDir) {
+  	super.setDest(PathsUtil.getFile(destDir));
     return this;
   }
   
-  public Unzip setSrc(String sourceFile) {
-    task.setSrc(PathsUtil.getFile(sourceFile));
+  public Unzip setSrcC(String sourceFile) {
+  	super.setSrc(PathsUtil.getFile(sourceFile));
     return this;
   }
   
-  public Unzip addFileset(String sourceDir, String filenamePattern) {
-    task.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));;
+  public Unzip addFilesetC(String sourceDir, String filenamePattern) {
+  	super.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));;
     return this;
   }
   

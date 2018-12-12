@@ -13,32 +13,21 @@ import org.apache.tools.ant.taskdefs.Expand;
  *
  * @author chris
  */
-public class Zip extends BaseTask {
-  private org.apache.tools.ant.taskdefs.Zip task = new org.apache.tools.ant.taskdefs.Zip();
+public class Zip extends org.apache.tools.ant.taskdefs.Zip {
 
   public Zip(
     Project project
   ) {
-    super(project);
-    task.setProject(project);
+    super.setProject(project);
   }
 
-  public org.apache.tools.ant.taskdefs.Zip getTask() {
-    return task;
-  }
-  
-  public Zip execute() {
-    task.execute();
+  public Zip setDestFileC(String destinationFile) {
+  	super.setDestFile(PathsUtil.getFile(destinationFile));
     return this;
   }
   
-  public Zip setDestFile(String destinationFile) {
-    task.setDestFile(PathsUtil.getFile(destinationFile));
-    return this;
-  }
-  
-  public Zip addFileset(String sourceDir, String filenamePattern) {
-    task.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));;
+  public Zip addFilesetC(String sourceDir, String filenamePattern) {
+  	super.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));;
     return this;
   }
   

@@ -8,6 +8,8 @@ package com.codeexcursion.ant.tasks;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Optional;
+
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 
@@ -15,18 +17,13 @@ import org.apache.tools.ant.Project;
  *
  * @author chris
  */
-public class FileCount extends BaseTask {
+public class FileCount {
 
   private String targetDir;
   private long count;
 
-  public FileCount(
-    Project project
-  ) {
-    super(project);
-  }
-
   public FileCount execute() {
+  	Optional.ofNullable(targetDir).orElseThrow(() -> new BuildException("Directory for FileCount not set."));
     try {
       long result = Files.list(Paths.get(targetDir)).count();
       if (result != count) {
