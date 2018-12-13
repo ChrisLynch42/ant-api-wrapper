@@ -30,11 +30,22 @@ public class ResourceCount extends org.apache.tools.ant.taskdefs.ResourceCount {
   /**
    * Encapsulates the parent add method.
    * @param time
-   * @return
+   * @return this object
    */  
   public ResourceCount addC(ResourceCollection resources) {
     super.add(resources);
     return this;
   }  
 
+  /**
+   * Encapsulates the parent setCount method.
+   * @param expectedCount - expected results
+   * @return this object
+   */  
+  public ResourceCount setCountC(int expectedCount) {
+    super.setCount(expectedCount);
+    return this;
+  }  
+  
+  
 }
