@@ -19,24 +19,46 @@ public class FixCRLF extends org.apache.tools.ant.taskdefs.FixCRLF {
 		super.setProject(project);
 	}
 
-	public FixCRLF setDestdir(String destDir) {
+	
+  /**
+   * Encapsulates the parent setDestdir method.
+   * @param destDir
+   * @return this object
+   */  	
+	public FixCRLF setDestdirC(String destDir) {
 		super.setDestdir(PathsUtil.getFile(destDir));
 		return this;
 	}
 
-	public FixCRLF addFilename(String filenamePattern) {
+	
+  /**
+   * Encapsulates the parent addFilename method.
+   * @param filenamePattern
+   * @return this object
+   */ 	
+	public FixCRLF addFilenameC(String filenamePattern) {
 		FilenameSelector filenameSelector = new FilenameSelector();
 		filenameSelector.setName(filenamePattern);
 		super.addFilename(filenameSelector);
 		return this;
 	}
 
-	public FixCRLF setSrcdir(String sourceDir) {
+  /**
+   * Encapsulates the parent setSrcdir method.
+   * @param sourceDir
+   * @return this object
+   */ 	
+	public FixCRLF setSrcdirC(String sourceDir) {
 		super.setSrcdir(PathsUtil.getFile(sourceDir));
 		return this;
 	}
 
-	public FixCRLF setEol(String eol) {
+  /**
+   * Encapsulates the parent setEolC method.
+   * @param eol - unix, dos, mac
+   * @return this object
+   */ 	
+	public FixCRLF setEolC(String eol) {
 		org.apache.tools.ant.taskdefs.FixCRLF.CrLf lineEnding = 
 				new org.apache.tools.ant.taskdefs.FixCRLF.CrLf();
 		lineEnding.setValue(eol);

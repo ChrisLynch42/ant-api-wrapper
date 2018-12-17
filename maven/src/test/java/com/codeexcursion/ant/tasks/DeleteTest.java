@@ -38,6 +38,8 @@ public class DeleteTest {
     new Delete(project).setFileC(destFile).execute();
 
     Assert.assertFalse("Test file exists when it shouldn't.", Files.exists(Paths.get(destFile)));
+    new Delete(project).setDirC(destDir).execute();
+    
   }  
   
 }
