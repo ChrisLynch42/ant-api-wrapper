@@ -62,7 +62,7 @@
             driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
             jdbcUrl="jdbc:sqlserver://999.999.999.99:9999;databaseName=Analytics9"
             user="Ikrome"
-            password='password'
+            password='password2'
             minPoolSize="9"
             maxPoolSize="9"
             acquireIncrement="9"
