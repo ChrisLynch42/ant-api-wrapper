@@ -35,7 +35,7 @@ public class WaitForTest {
     
     boolean isAcceptable = (400 < result && result < 600);
      
-    Assert.assertTrue("WaitFor duration outside acceptable parameters.", isAcceptable);
+    Assert.assertTrue("WaitFor duration outside acceptable parameters:  " + result, isAcceptable);
     
   }  
 
