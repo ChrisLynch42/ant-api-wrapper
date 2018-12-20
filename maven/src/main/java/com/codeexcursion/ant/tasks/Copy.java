@@ -88,5 +88,14 @@ public class Copy extends org.apache.tools.ant.taskdefs.Copy {
 	  return this;
   }
   
+  /**
+   * Encapsulates the parent setToFile method.
+   * @param file - File to be copied.
+   * @return this object
+   */   
+  public Copy setTofileC(String file) {
+  	super.setTofile(PathsUtil.getFile(file));
+	  return this;
+  }  
   
 }

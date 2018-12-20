@@ -20,7 +20,8 @@ public class ExecTaskTest {
   public void testFlattenCopy() {
     Project project = new Project();
     project.setName("Test Run Executable on host os.");
-
+    String outputK3y = "test_output";
+    
     String os = System.getProperty("os.name");
     
     if(os == null || os.isEmpty()) {
@@ -31,6 +32,7 @@ public class ExecTaskTest {
         new Execute(project)
           .setExecutableC("ls")
           .addArgumentC("-alrt")
+          .setOutputpropertyC(outputK3y)
           .execute();
     }
     
@@ -38,8 +40,12 @@ public class ExecTaskTest {
         new Execute(project)
           .setExecutableC("dir")
           .addArgumentC("/w")
+          .setOutputpropertyC(outputK3y)
           .execute();
     }
+    
+    Assert.assertNotNull("Output should not be null.", project.getProperty(outputK3y));
+    Assert.assertTrue("Output should not be null.", project.getProperty(outputK3y).length() > 5);
   }
 
   
