@@ -18,18 +18,28 @@ import org.apache.tools.ant.Project;
  */
 public class Tstamp extends org.apache.tools.ant.taskdefs.Tstamp {
 
+  private static final String propertyName = "tStamp";
+  
   public Tstamp(
     Project project,
-    String pattern,
-    String propertyName
+    String pattern
   ) {
 		Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
 		Optional.ofNullable(pattern).orElseThrow(() -> new BuildException("Task requires a valid pattern."));
-		Optional.ofNullable(propertyName).orElseThrow(() -> new BuildException("Task requires a valid property name."));
 	super.setProject(project);
 	Tstamp.CustomFormat format = super.createFormat();
 	format.setPattern(pattern);
 	format.setProperty(propertyName);
+  }  
+  
+  public Tstamp executeC() {
+	  this.execute();
+	  return this;
   }
+  
 
+  public String getResult() {
+	  return getProject().getProperty(propertyName);
+  }
+  
 }

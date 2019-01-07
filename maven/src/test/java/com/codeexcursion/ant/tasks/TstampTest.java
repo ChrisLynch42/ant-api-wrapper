@@ -24,9 +24,8 @@ public class TstampTest {
     Project project = new Project();
     project.setName("Is available unit test.");
     String propertyName = "tStamp";
-    Tstamp tstamp = new Tstamp(project, "yyyy-MM-dd-HH-mm-ss-SSS", propertyName);
-    tstamp.execute();
-    String first = project.getProperty(propertyName);
+    Tstamp tstamp = new Tstamp(project, "yyyy-MM-dd-HH-mm-ss-SSS");
+    String first = tstamp.executeC().getResult();
     
     Assert.assertTrue("Result is to short..", first.length() > 18);
     String regex = "^\\d{4}-\\d{2}-\\d{2}-\\d{2}-\\d{2}-\\d{2}-\\d{3}.*";
