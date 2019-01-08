@@ -18,7 +18,7 @@ import org.apache.tools.ant.Project;
  */
 public class Tstamp extends org.apache.tools.ant.taskdefs.Tstamp {
 
-  private static final String propertyName = "tStamp";
+  public static final String PROPERTY_NAME = "timestamp";
   
   public Tstamp(
     Project project,
@@ -29,7 +29,7 @@ public class Tstamp extends org.apache.tools.ant.taskdefs.Tstamp {
 	super.setProject(project);
 	Tstamp.CustomFormat format = super.createFormat();
 	format.setPattern(pattern);
-	format.setProperty(propertyName);
+	format.setProperty(PROPERTY_NAME);
   }  
   
   public Tstamp executeC() {
@@ -39,7 +39,7 @@ public class Tstamp extends org.apache.tools.ant.taskdefs.Tstamp {
   
 
   public String getResult() {
-	  return getProject().getProperty(propertyName);
+	  return getProject().getProperty(PROPERTY_NAME);
   }
   
 }

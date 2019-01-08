@@ -17,7 +17,7 @@ import org.junit.Test;
 public class ExecTaskTest {
   
   @Test
-  public void testFlattenCopy() {
+  public void testRun() {
     Project project = new Project();
     project.setName("Test Run Executable on host os.");
     String outputK3y = "test_output";
@@ -48,5 +48,19 @@ public class ExecTaskTest {
     Assert.assertTrue("Output should not be null.", project.getProperty(outputK3y).length() > 5);
   }
 
+  @Test
+  public void testRun2() {
+    Project project = new Project();
+    project.setName("Test Run Executable on host os.");
+    
+    String result = new Execute(project)
+          .setExecutableC("ls")
+          .addArgumentC("-alrt")
+          .executeC().getOutput();
+    
+    
+    Assert.assertNotNull("Output should not be null.", result);
+    Assert.assertTrue("Output should not be null.", result.length() > 5);
+  }  
   
 }

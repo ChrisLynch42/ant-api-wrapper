@@ -15,20 +15,22 @@ import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 
 /**
- * Defaults to setFailOnError(true), setSpawn(false) and setLogError(true).
+ * Defaults to setProperty().
  * @author chris
  */
 public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {
 
   private String executableCopy;
   private List<String> argsCopy = new ArrayList<>();
+  public static final String PROPERTY_NAME = "result";
 
   public Execute(
     Project project
   ) {
-	Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
+	  Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
 	  
     super.setProject(project);
+    super.setOutputproperty(PROPERTY_NAME);
   }
 
   
@@ -126,4 +128,12 @@ public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {
     return this;
   }    
 
+  /**
+   * Returns the output.
+   * @return the output from the executable.
+   */ 
+  public String getOutput() {
+    return super.getProject().getProperty(PROPERTY_NAME);
+  }  
+  
 }
