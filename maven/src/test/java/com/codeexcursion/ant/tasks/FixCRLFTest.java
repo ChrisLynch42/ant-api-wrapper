@@ -32,20 +32,20 @@ public class FixCRLFTest {
     
     new Mkdir(project).setDirC(destDir).execute();
 
-    new Copy(project)
-      .setTodirC(destDir)
-      .addFilesetC(sourceDir, "**/*")
+    new Copy.Builder(project)
+      .setTodir(destDir)
+      .addFileset(sourceDir, "**/*").getCopy()
       .execute();
 
     Assert.assertTrue("Files should match.", new FilesMatch().setFile1C(sourceFile).setFile2C(destFile).eval());    
     
-    new FixCRLF(project).setSrcdirC(destDir).addFilenameC("test.txt").setEolC("dos").execute();
+    new FixCRLF.Builder(project).setSrcdir(destDir).addFilename("test.txt").setEol("dos").getFixCRLF().execute();
     Assert.assertFalse("Files should match.", new FilesMatch().setFile1C(sourceFile).setFile2C(destFile).eval());
     
-    new FixCRLF(project).setSrcdirC(destDir).addFilenameC("test.txt").setEolC("unix").execute();
+    new FixCRLF.Builder(project).setSrcdir(destDir).addFilename("test.txt").setEol("unix").getFixCRLF().execute();
     Assert.assertTrue("Files should match.", new FilesMatch().setFile1C(sourceFile).setFile2C(destFile).eval());
     
-    new Delete(project).setDirC(destDir).execute();
+    new Delete.Builder(project).setDir(destDir).getDelete().execute();
   }
   
 }

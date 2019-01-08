@@ -6,6 +6,7 @@
 package com.codeexcursion.ant.tasks;
 
 import java.io.File;
+import java.util.Enumeration;
 import java.util.Optional;
 
 import com.codeexcursion.ant.util.PathsUtil;
@@ -22,43 +23,84 @@ import org.apache.tools.ant.taskdefs.condition.Condition;
  */
 public class WaitFor extends org.apache.tools.ant.taskdefs.WaitFor {
 
-  public WaitFor(
-    Project project
-  ) {
-		Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
-		super.setProject(project);
+  private String failMessage;
+  
+  private WaitFor() {
+    
   }
-
+  
   /**
-   * Encapsulates the parent setMaxWait method.
-   * @param time
+   * Boolean AND result of all condition boolean results.
    * @return
    */
-  public WaitFor setMaxWaitC(long time) {
-		super.setMaxWait(time);
-		return this;
-  }
-
-  /**
-   * Encapsulates the WaitFor setMaxWaitUnit method.
-   * @param time
-   * @return
-   */
-  public WaitFor setMaxWaitUnitC(String timeUnit) {
-  	WaitFor.Unit unit = new WaitFor.Unit();
-  	unit.setValue(timeUnit);
-		super.setMaxWaitUnit(unit);
-		return this;
+  public boolean eval() {
+    Enumeration<Condition> conditions = this.getConditions();
+    boolean returnValue = true;
+    while(conditions.hasMoreElements()) {
+      returnValue = conditions.nextElement().eval() && returnValue;
+    }
+    return returnValue;
   }  
   
-  /**
-   * Encapsulates the WaitFor setMaxWaitUnit method.
-   * @param time
-   * @return
-   */
-  public WaitFor addC(Condition condition) {
-		super.add(condition);
-		return this;
-  }    
+  public void executeWithFail() {
+    Optional.ofNullable(this.getFailMessage()).orElseThrow(() -> new BuildException("Fail message must be supplied"));    
+    super.execute();
+    if(!eval()) {
+      throw new BuildException(failMessage);
+    }
+  }
   
+  public String getFailMessage() {
+    return failMessage;
+  }
+  
+  public void setFailMessage(String failMessage) {
+    this.failMessage=failMessage;
+  }  
+  
+  public static class Builder {
+    private WaitFor waitFor;
+    
+      public Builder(Project project) {
+        Optional.ofNullable(project).orElseThrow(IllegalArgumentException::new);
+        waitFor = new WaitFor();
+        waitFor.setProject(project);
+      }
+  
+    /**
+     * Encapsulates the setMaxWait method.
+     * @param time
+     * @return
+     */
+    public Builder setMaxWait(long time) {
+      waitFor.setMaxWait(time);
+  		return this;
+    }
+  
+    /**
+     * Encapsulates the setMaxWaitUnit method.
+     * @param time
+     * @return
+     */
+    public Builder setMaxWaitUnit(String timeUnit) {
+    	WaitFor.Unit unit = new WaitFor.Unit();
+    	unit.setValue(timeUnit);
+    	waitFor.setMaxWaitUnit(unit);
+  		return this;
+    }  
+    
+    /**
+     * Encapsulates the setMaxWaitUnit method.
+     * @param time
+     * @return
+     */
+    public Builder add(Condition condition) {
+      waitFor.add(condition);
+  		return this;
+    }
+    
+    public WaitFor getWaitFor() {
+      return waitFor;
+    }
+  } 
 }

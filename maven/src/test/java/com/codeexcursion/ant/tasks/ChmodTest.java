@@ -30,10 +30,10 @@ public class ChmodTest {
     String destDir = TestHelper.BASE_DIR + "copyDeleteDest/";
     testCopyAndDeleteTree1(project, destDir);
     
-    new Chmod(project)
-      .setDirC(destDir)
-      .setPermC("u+rwx,g-rwx,o-rwx")
-      .setTypeC("dir")
+    new Chmod.Builder(project)
+      .setDir(destDir)
+      .setPerm("u+rwx,g-rwx,o-rwx")
+      .setType("dir").getChmod()
       .execute();
     
     Set<PosixFilePermission> permissions = Files.getPosixFilePermissions(Paths.get(destDir), LinkOption.NOFOLLOW_LINKS);
@@ -49,10 +49,10 @@ public class ChmodTest {
     Assert.assertFalse("Others did have execute permission.", permissions.contains(PosixFilePermission.OTHERS_EXECUTE));
     Assert.assertFalse("Others did have write permission.", permissions.contains(PosixFilePermission.OTHERS_WRITE));    
     
-    new Chmod(project)
-      .setDirC(destDir)
-      .setPermC("u+rwx,g+rwx,o+rwx")
-      .setTypeC("dir")
+    new Chmod.Builder(project)
+      .setDir(destDir)
+      .setPerm("u+rwx,g+rwx,o+rwx")
+      .setType("dir").getChmod()
       .execute();
 
     permissions = Files.getPosixFilePermissions(Paths.get(destDir), LinkOption.NOFOLLOW_LINKS);

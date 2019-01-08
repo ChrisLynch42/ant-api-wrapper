@@ -35,9 +35,9 @@ public class ReplaceTest {
     String compareFile = sourceDir + "replace.txt";
     String changedFile = destDir + filename;
     
-    new Copy(project)
-      .setTodirC(destDir)
-      .setFileC(sourceFile)
+    new Copy.Builder(project)
+      .setTodir(destDir)
+      .setFile(sourceFile).getCopy()
       .execute();    
     
     new Replace(project).setFileC(destDir + filename).setTokenC("Test").setValueC("Replace").execute();

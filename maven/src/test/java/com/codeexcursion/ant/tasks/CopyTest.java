@@ -25,10 +25,10 @@ public class CopyTest {
     String sourceDir =  TestHelper.TREE_DIR;
     new Mkdir(project).setDirC(destDir).execute();
 
-    new Copy(project)
-      .setTodirC(destDir)
-      .addFilesetC(sourceDir, "**/*")
-      .setFlattenC(true)
+    new Copy.Builder(project)
+      .setTodir(destDir)
+      .addFileset(sourceDir, "**/*")
+      .setFlatten(true).getCopy()
       .execute();
     
     String filename = destDir + "/test.txt";
@@ -36,7 +36,7 @@ public class CopyTest {
     filename = destDir + "/test4.txt";
     Assert.assertTrue("File " + filename + " should exist.", Files.exists(Paths.get(filename)));
     
-    new Delete(project).setDirC(destDir).execute();
+    new Delete.Builder(project).setDir(destDir).getDelete().execute();
   }
 
   @Test
@@ -59,10 +59,10 @@ public class CopyTest {
     String subDirname = destDir + "/test/subTest";
     String subFilename = subDirname + "/test4.txt";
 
-    new Delete(project).setQuietC(true).addFilesetC(destDir, "**/*").execute();
-    new Copy(project)
-      .setTodirC(destDir)
-      .addFilesetC(sourceDir, "**/*")
+    new Delete.Builder(project).setQuiet(true).addFileset(destDir, "**/*").getDelete().execute();
+    new Copy.Builder(project)
+      .setTodir(destDir)
+      .addFileset(sourceDir, "**/*").getCopy()
       .execute();
     Assert.assertTrue("File " + filename + " should exist.", Files.exists(Paths.get(filename)));
     Assert.assertTrue("Directory " + dirname + " should exist.", Files.exists(Paths.get(dirname)));
@@ -73,7 +73,7 @@ public class CopyTest {
 
   public static final void testCopyAndDeleteTree2(Project project, String destDir) {
     
-    new Delete(project).setDirC(destDir).execute();
+    new Delete.Builder(project).setDir(destDir).getDelete().execute();
     Assert.assertFalse("Directory " + destDir + " should not exist.", Files.exists(Paths.get(destDir)));
   }    
   

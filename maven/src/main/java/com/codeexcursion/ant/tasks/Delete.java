@@ -6,6 +6,8 @@
 package com.codeexcursion.ant.tasks;
 
 import java.io.File;
+import java.util.Optional;
+
 import com.codeexcursion.ant.util.PathsUtil;
 import org.apache.tools.ant.Project;
 
@@ -16,64 +18,82 @@ import org.apache.tools.ant.Project;
  */
 public class Delete extends org.apache.tools.ant.taskdefs.Delete {
 
-  public Delete(
-    Project project
-  ) {
-    super.setProject(project);
-    super.setIncludeEmptyDirs(true);
-  }
-
+  private Delete() {}
+  
   
   /**
-   * Encapsulates the parent setIncludeEmptyDirs method.
-   * @param includeEmptyDirs
-   * @return this object
-   */   
-  public Delete setIncludeEmptyDirsC(boolean includeEmptyDirs) {
-  	super.setIncludeEmptyDirs(includeEmptyDirs);
-    return this;
-  }
+   * Defaults to setIncludeEmptyDirs(true).
+   *
+   * @author chris
+   */
+  public static class Builder {
+    private Delete delete;
 
-  /**
-   * Encapsulates the parent setDir method.
-   * @param targetDir - Directory to be deleted.
-   * @return this object
-   */   
-  public Delete setDirC(String targetDir) {
-  	super.setDir(PathsUtil.getFile(targetDir));
-    return this;
-  }
-
-  /**
-   * Encapsulates the parent setFile method.
-   * @param file - File to be deleted.
-   * @return this object
-   */   
-  public Delete setFileC(String file) {
-  	super.setFile(PathsUtil.getFile(file));
-	  return this;
-  }  
+    public Builder(
+      Project project
+    ) {
+      Optional.ofNullable(project).orElseThrow(IllegalArgumentException::new);
+      delete = new Delete();
+      delete.setProject(project);
+      delete.setIncludeEmptyDirs(true);
+    }
   
-  /**
-   * Encapsulates the parent addFileset method.
-   * @param sourceDir - The parent directory of files which are to be deleted.
-   * @param filenamePattern - Pattern to be used to select files in sourceDir.
-   * @return this object
-   */   
-  public Delete addFilesetC(String sourceDir, String filenamePattern) {
-  	super.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));
-    return this;
-  }
+    
+    /**
+     * Encapsulates the parent setIncludeEmptyDirs method.
+     * @param includeEmptyDirs
+     * @return this object
+     */   
+    public Builder setIncludeEmptyDirs(boolean includeEmptyDirs) {
+      delete.setIncludeEmptyDirs(includeEmptyDirs);
+      return this;
+    }
+  
+    /**
+     * Encapsulates the parent setDir method.
+     * @param targetDir - Directory to be deleted.
+     * @return this object
+     */   
+    public Builder setDir(String targetDir) {
+      delete.setDir(PathsUtil.getFile(targetDir));
+      return this;
+    }
+  
+    /**
+     * Encapsulates the parent setFile method.
+     * @param file - File to be deleted.
+     * @return this object
+     */   
+    public Builder setFile(String file) {
+      delete.setFile(PathsUtil.getFile(file));
+  	  return this;
+    }  
+    
+    /**
+     * Encapsulates the parent addFileset method.
+     * @param sourceDir - The parent directory of files which are to be deleted.
+     * @param filenamePattern - Pattern to be used to select files in sourceDir.
+     * @return this object
+     */   
+    public Builder addFileset(String sourceDir, String filenamePattern) {
+      delete.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));
+      return this;
+    }
+  
+    /**
+     * Encapsulates the parent setQuiet method.
+     * @param isQuiet
+     * @return this object
+     */   
+    public Builder setQuiet(boolean isQuiet) {
+      delete.setQuiet(isQuiet);
+      return this;
+    }
+    
+    public Delete getDelete() {
+      return delete;
+    }
 
-  /**
-   * Encapsulates the parent setQuiet method.
-   * @param isQuiet
-   * @return this object
-   */   
-  public Delete setQuietC(boolean isQuiet) {
-  	super.setQuiet(isQuiet);
-    return this;
   }
-
   
 }

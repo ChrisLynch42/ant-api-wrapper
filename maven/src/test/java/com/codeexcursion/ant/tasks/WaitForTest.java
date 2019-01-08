@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.Set;
 import org.junit.Assert;
+import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 import org.junit.Test;
 
@@ -26,9 +27,8 @@ public class WaitForTest {
     
     long start = System.currentTimeMillis();
 
-    new WaitFor(project).setMaxWaitC(400).setMaxWaitUnitC(WaitFor.Unit.MILLISECOND)
-  	.addC(new Available(project).setFileC("xxxxxxxxxxxxxxxxxxxx"))
-  	.execute();
+    new WaitFor.Builder(project).setMaxWait(400).setMaxWaitUnit(WaitFor.Unit.MILLISECOND)
+  	.add(new Available.Builder(project).setFile("xxxxxxxxxxxxxxxxxxxx").getAvailable()).getWaitFor().execute();
 
     long end = System.currentTimeMillis();
     long result = end - start;
@@ -36,6 +36,18 @@ public class WaitForTest {
     boolean isAcceptable = (400 < result && result < 600);
      
     Assert.assertTrue("WaitFor duration outside acceptable parameters:  " + result, isAcceptable);
+    
+  }  
+  
+  @Test(expected = BuildException.class)
+  public void testNoFileException()  throws IOException {
+    Project project = new Project();
+    project.setName("Is available unit test.");
+    
+
+    new WaitFor.Builder(project).setMaxWait(400).setMaxWaitUnit(WaitFor.Unit.MILLISECOND)
+    .add(new Available.Builder(project).setFile("xxxxxxxxxxxxxxxxxxxx").getAvailable()).getWaitFor().executeWithFail();
+
     
   }  
 
@@ -49,18 +61,20 @@ public class WaitForTest {
     String sourceFile = sourceDir + filename;    
     long start = System.currentTimeMillis();
 
-    new WaitFor(project).setMaxWaitC(100).setMaxWaitUnitC(WaitFor.Unit.MILLISECOND)
-  	.addC(new Available(project).setFileC(sourceFile))
+    new WaitFor.Builder(project).setMaxWait(100).setMaxWaitUnit(WaitFor.Unit.MILLISECOND)
+  	.add(new Available.Builder(project).setFile(sourceFile).getAvailable()).getWaitFor()
   	.execute();
 
     long end = System.currentTimeMillis();
     long result = end - start;
     
-    boolean isAcceptable = (1 < result && result < 100);
+    boolean isAcceptable = (result < 3);
      
     Assert.assertTrue("WaitFor duration outside acceptable parameters.", isAcceptable);
     
   }  
 
+  
+  
   
 }

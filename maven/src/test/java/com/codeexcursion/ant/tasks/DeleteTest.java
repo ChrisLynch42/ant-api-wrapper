@@ -33,12 +33,12 @@ public class DeleteTest {
     String destFile = destDir + fileName;
     
     new Mkdir(project).setDirC(destDir).execute();
-    new Copy(project).setFileC(sourceFile).setTodirC(destDir).execute();
+    new Copy.Builder(project).setFile(sourceFile).setTodir(destDir).getCopy().execute();
     Assert.assertTrue("Test file doesn't exist.", Files.exists(Paths.get(destFile)));
-    new Delete(project).setFileC(destFile).execute();
+    new Delete.Builder(project).setFile(destFile).getDelete().execute();
 
     Assert.assertFalse("Test file exists when it shouldn't.", Files.exists(Paths.get(destFile)));
-    new Delete(project).setDirC(destDir).execute();
+    new Delete.Builder(project).setDir(destDir).getDelete().execute();
     
   }  
   

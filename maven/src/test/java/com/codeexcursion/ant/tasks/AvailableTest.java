@@ -25,7 +25,7 @@ public class AvailableTest {
     project.setName("Is available unit test.");
     
     String sourceFile = "src/test/artifacts/treeSrc/test.txt";
-    Assert.assertTrue("File was not found.", new Available(project).setFileC(sourceFile).eval());
+    Assert.assertTrue("File was not found.", new Available.Builder(project).setFile(sourceFile).getAvailable().eval());
   }  
 
   
@@ -35,7 +35,7 @@ public class AvailableTest {
     project.setName("Is available unit test.");
     
     String sourceFile = "src/test/artifacts/treeSrc/noSuchFile.txt";
-    Assert.assertFalse("File shouldn't exist but was found.", new Available(project).setFileC(sourceFile).eval());
+    Assert.assertFalse("File shouldn't exist but was found.", new Available.Builder(project).setFile(sourceFile).getAvailable().eval());
   }  
   
   

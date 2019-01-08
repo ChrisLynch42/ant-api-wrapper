@@ -17,23 +17,35 @@ import org.apache.tools.ant.Project;
  * @author chris
  */
 public class Available extends org.apache.tools.ant.taskdefs.Available {
-
-  public Available(
-    Project project
-  ) {
-	Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
-	super.setProject(project);
+  private Available() {
+    
   }
-
   
-  /**
-   * Encapsulates the parent setMaxWait method.
-   * @param time
-   * @return
-   */  
-  public Available setFileC(String file) {
-    super.setFile(PathsUtil.getFile(file));
-    return this;
-  }  
-
+  
+  public static class Builder {
+    private Available available;
+    
+    public Builder(
+      Project project
+    ) {
+      Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
+      available = new Available();
+      available.setProject(project);
+    }
+  
+    
+    /**
+     * Encapsulates the parent setMaxWait method.
+     * @param time
+     * @return
+     */  
+    public Builder setFile(String file) {
+      available.setFile(PathsUtil.getFile(file));
+      return this;
+    }
+    
+    public Available getAvailable() {
+      return available;
+    }
+  }
 }

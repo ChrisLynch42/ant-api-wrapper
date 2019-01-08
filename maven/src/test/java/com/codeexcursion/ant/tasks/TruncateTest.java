@@ -35,9 +35,9 @@ public class TruncateTest {
     String sourceFile = sourceDir + filename;
     String changedFile = destDir + filename;
 
-    new Copy(project)
-    .setTodirC(destDir)
-    .setFileC(sourceFile)
+    new Copy.Builder(project)
+    .setTodir(destDir)
+    .setFile(sourceFile).getCopy()
     .execute();    
         
     new Truncate(project).setFileC(changedFile).execute();

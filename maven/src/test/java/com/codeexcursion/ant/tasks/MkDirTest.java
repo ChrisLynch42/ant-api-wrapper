@@ -23,12 +23,12 @@ public class MkDirTest {
     
     String destDir = TestHelper.BASE_DIR + "/iWasMade";
     if(Files.exists(Paths.get(destDir))) {
-      new Delete(project).setQuietC(true).setDirC(destDir).execute();
+      new Delete.Builder(project).setQuiet(true).setDir(destDir).getDelete().execute();
     }
     new Mkdir(project).setDirC(destDir).execute();
     Assert.assertTrue("Directory " + destDir + " should exist.", Files.exists(Paths.get(destDir)));
 
-    new Delete(project).setDirC(destDir).execute();
+    new Delete.Builder(project).setDir(destDir).getDelete().execute();
     Assert.assertFalse("Directory " + destDir + " should not exist.", Files.exists(Paths.get(destDir)));
     
   }

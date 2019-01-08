@@ -29,18 +29,18 @@ public class ExecTaskTest {
     }
     
     if(os.toLowerCase().contains("inux")) {
-        new Execute(project)
-          .setExecutableC("ls")
-          .addArgumentC("-alrt")
-          .setOutputpropertyC(outputK3y)
+        new Execute.Builder(project)
+          .setExecutable("ls")
+          .addArgument("-alrt")
+          .setOutputproperty(outputK3y).getExecute()
           .execute();
     }
     
     if(os.toLowerCase().contains("indow")) {
-        new Execute(project)
-          .setExecutableC("dir")
-          .addArgumentC("/w")
-          .setOutputpropertyC(outputK3y)
+        new Execute.Builder(project)
+          .setExecutable("dir")
+          .addArgument("/w")
+          .setOutputproperty(outputK3y).getExecute()
           .execute();
     }
     
@@ -53,10 +53,10 @@ public class ExecTaskTest {
     Project project = new Project();
     project.setName("Test Run Executable on host os.");
     
-    String result = new Execute(project)
-          .setExecutableC("ls")
-          .addArgumentC("-alrt")
-          .executeC().getOutput();
+    String result = new Execute.Builder(project)
+          .setExecutable("ls")
+          .addArgument("-alrt").getExecute()
+          .executeOutput();
     
     
     Assert.assertNotNull("Output should not be null.", result);

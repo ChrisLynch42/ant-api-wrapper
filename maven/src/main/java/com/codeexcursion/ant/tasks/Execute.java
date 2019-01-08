@@ -24,21 +24,14 @@ public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {
   private List<String> argsCopy = new ArrayList<>();
   public static final String PROPERTY_NAME = "result";
 
-  public Execute(
-    Project project
-  ) {
-	  Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
-	  
-    super.setProject(project);
-    super.setOutputproperty(PROPERTY_NAME);
-  }
 
+  private Execute() {}
   
   /**
    * Encapsulates the parent execute method.
    * @return this object
    */    
-  public Execute executeC() {
+  public void execute() {
     try {
       super.execute();
     } catch (BuildException exception) {
@@ -48,92 +41,136 @@ public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {
       buildException.addSuppressed(exception);
       throw buildException;
     }
-    return this;
   }
 
   /**
-   * Encapsulates the parent addExecutable method. This class
+   * call the execute method and return the output.
+   * @return Output string.
+   */    
+  public String executeOutput() {
+    execute();    
+    return getOutput();
+  }  
+  
+  /**
+   * Encapsulates the parent setExecutable method. This class
    * also maintains a copy of the executable to use in error
    * reporting.
    * @return this object
    */  
-  public Execute setExecutableC(String executable) {
+  public void setExecutable(String executable) {
     super.setExecutable(executable);
     this.executableCopy=executable;
-    return this;
-  }
-
+  }  
+  
   /**
    * Encapsulates the parent createArg().setValue(argument) method.  This
    * class also maintains an array of the arguments to use in error reporting.
    * @return this object
    */ 
-  public Execute addArgumentC(String argument) {
+  public void addArgument(String argument) {
     super.createArg().setValue(argument);
     argsCopy.add(argument);
-    return this;
-  }
-
-  /**
-   * Encapsulates the parent setOutputproperty method.  
-   * @return this object
-   */ 
-  public Execute setOutputpropertyC(String outputProp) {
-    super.setOutputproperty(outputProp);
-    return this;
-  }  
- 
-  /**
-   * Encapsulates the parent setSpawn method.
-   * @return this object
-   */ 
-  public Execute setSpawnC(boolean spawn) {
-    super.setSpawn(spawn);
-    return this;
-  }   
-  
-  /**
-   * Encapsulates the parent setFailonerror method.
-   * @return this object
-   */ 
-  public Execute setFailonerrorC(boolean failOnError) {
-    super.setFailonerror(failOnError);
-    return this;
-  }
-  
-  /**
-   * Encapsulates the parent setVMLauncher method.
-   * @return this object
-   */ 
-  public Execute setVMLauncherC(boolean vmLauncher) {
-    super.setVMLauncher(vmLauncher);
-    return this;
   }  
   
-  /**
-   * Encapsulates the parent setSearchPath method.
-   * @return this object
-   */ 
-  public Execute setSearchPathC(boolean searchPath) {
-    super.setSearchPath(searchPath);
-    return this;
-  }
-  
-  /**
-   * Encapsulates the parent setOutput method.
-   * @return this object
-   */ 
-  public Execute setOutputC(String file) {
-    super.setOutput(PathsUtil.getFile(file));
-    return this;
-  }    
-
   /**
    * Returns the output.
    * @return the output from the executable.
    */ 
   public String getOutput() {
     return super.getProject().getProperty(PROPERTY_NAME);
-  }  
+  }   
   
+  public static class Builder {
+    private Execute execute;
+    
+    public Builder(
+      Project project
+    ) {
+  	  Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
+  	  execute = new Execute();
+  	  execute.setProject(project);
+  	  execute.setOutputproperty(PROPERTY_NAME);
+    }
+  
+    /**
+     * Encapsulates the parent addExecutable method. This class
+     * also maintains a copy of the executable to use in error
+     * reporting.
+     * @return this object
+     */  
+    public Builder setExecutable(String executable) {
+      execute.setExecutable(executable);
+      return this;
+    }
+  
+    /**
+     * Encapsulates the parent createArg().setValue(argument) method.  This
+     * class also maintains an array of the arguments to use in error reporting.
+     * @return this object
+     */ 
+    public Builder addArgument(String argument) {
+      execute.createArg().setValue(argument);
+      return this;
+    }
+  
+    /**
+     * Encapsulates the parent setOutputproperty method.  
+     * @return this object
+     */ 
+    public Builder setOutputproperty(String outputProp) {
+      execute.setOutputproperty(outputProp);
+      return this;
+    }  
+   
+    /**
+     * Encapsulates the parent setSpawn method.
+     * @return this object
+     */ 
+    public Builder setSpawn(boolean spawn) {
+      execute.setSpawn(spawn);
+      return this;
+    }   
+    
+    /**
+     * Encapsulates the parent setFailonerror method.
+     * @return this object
+     */ 
+    public Builder setFailonerror(boolean failOnError) {
+      execute.setFailonerror(failOnError);
+      return this;
+    }
+    
+    /**
+     * Encapsulates the parent setVMLauncher method.
+     * @return this object
+     */ 
+    public Builder setVMLauncher(boolean vmLauncher) {
+      execute.setVMLauncher(vmLauncher);
+      return this;
+    }  
+    
+    /**
+     * Encapsulates the parent setSearchPath method.
+     * @return this object
+     */ 
+    public Builder setSearchPath(boolean searchPath) {
+      execute.setSearchPath(searchPath);
+      return this;
+    }
+    
+    /**
+     * Encapsulates the parent setOutput method.
+     * @return this object
+     */ 
+    public Builder setOutput(String file) {
+      execute.setOutput(PathsUtil.getFile(file));
+      return this;
+    }    
+  
+ 
+    public Execute getExecute() {
+      return execute;
+    }
+  }
 }

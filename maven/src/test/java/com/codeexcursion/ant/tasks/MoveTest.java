@@ -27,9 +27,9 @@ public class MoveTest {
     new Mkdir(project).setDirC(destDir).execute();
     new Mkdir(project).setDirC(moveDestDir).execute();
 
-    new Copy(project)
-      .setTodirC(destDir)
-      .addFilesetC(sourceDir, "**/*")
+    new Copy.Builder(project)
+      .setTodir(destDir)
+      .addFileset(sourceDir, "**/*").getCopy()
       .execute();
         
     String filename = destDir + "/test.txt";
@@ -39,8 +39,8 @@ public class MoveTest {
     filename = moveDestDir + "/test.txt";
     Assert.assertTrue("File " + filename + " should exist.", Files.exists(Paths.get(filename)));
     
-    new Delete(project).setDirC(destDir).execute();
-    new Delete(project).setDirC(moveDestDir).execute();
+    new Delete.Builder(project).setDir(destDir).getDelete().execute();
+    new Delete.Builder(project).setDir(moveDestDir).getDelete().execute();
   }
 
   @Test
@@ -54,9 +54,9 @@ public class MoveTest {
     new Mkdir(project).setDirC(destDir).execute();
     new Mkdir(project).setDirC(moveDestDir).execute();
 
-    new Copy(project)
-      .setTodirC(destDir)
-      .addFilesetC(sourceDir, "**/*")
+    new Copy.Builder(project)
+      .setTodir(destDir)
+      .addFileset(sourceDir, "**/*").getCopy()
       .execute();
         
     String filename = "test.txt";
@@ -73,8 +73,8 @@ public class MoveTest {
     filepath = moveDestDir + subFilename;
     Assert.assertTrue("File " + filename + " should exist.", Files.exists(Paths.get(filepath)));
     
-    new Delete(project).setDirC(destDir).execute();
-    new Delete(project).setDirC(moveDestDir).execute();
+    new Delete.Builder(project).setDir(destDir).getDelete().execute();
+    new Delete.Builder(project).setDir(moveDestDir).getDelete().execute();
   }  
   
 }

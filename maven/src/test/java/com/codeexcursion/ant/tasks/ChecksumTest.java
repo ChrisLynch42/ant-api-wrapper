@@ -28,12 +28,12 @@ public class ChecksumTest {
     String algorithm = "SHA-256";
     String sourceFile = TestHelper.TREE_DIR + "test.txt";
     String hashFile = sourceFile + "." + algorithm;
-    new Checksum(project).setAlgorithmC(algorithm).setFileC(sourceFile).setTodirC(TestHelper.TREE_DIR).execute();
+    new Checksum.Builder(project).setAlgorithm(algorithm).setFile(sourceFile).setTodir(TestHelper.TREE_DIR).getChecksum().execute();
 
-    Assert.assertTrue("File was not found.", new Available(project).setFileC(sourceFile).eval());
+    Assert.assertTrue("File was not found.", new Available.Builder(project).setFile(sourceFile).getAvailable().eval());
     
-    Assert.assertTrue("Hash was not valid.", new Checksum(project).setAlgorithmC(algorithm).setFileC(sourceFile).eval());
-    new Delete(project).setFileC(hashFile).execute();    
+    Assert.assertTrue("Hash was not valid.", new Checksum.Builder(project).setAlgorithm(algorithm).setFile(sourceFile).getChecksum().eval());
+    new Delete.Builder(project).setFile(hashFile).getDelete().execute();    
   }  
  
   
@@ -45,14 +45,14 @@ public class ChecksumTest {
     String algorithm = "SHA-256";
     String sourceFile = TestHelper.TREE_DIR + "test.txt";
     String hashFile = sourceFile + "." + algorithm;
-    new Checksum(project).setAlgorithmC(algorithm).setFileC(sourceFile).setTodirC(TestHelper.TREE_DIR).execute();
+    new Checksum.Builder(project).setAlgorithm(algorithm).setFile(sourceFile).setTodir(TestHelper.TREE_DIR).getChecksum().execute();
 
-    Assert.assertTrue("File was not found.", new Available(project).setFileC(sourceFile).eval());
+    Assert.assertTrue("File was not found.", new Available.Builder(project).setFile(sourceFile).getAvailable().eval());
     
     Files.write(Paths.get(hashFile), "xxxxx".getBytes(), StandardOpenOption.WRITE);    
     
-    Assert.assertFalse("Hash was not valid.", new Checksum(project).setAlgorithmC(algorithm).setFileC(sourceFile).eval());
-    new Delete(project).setFileC(hashFile).execute();    
+    Assert.assertFalse("Hash was not valid.", new Checksum.Builder(project).setAlgorithm(algorithm).setFile(sourceFile).getChecksum().eval());
+    new Delete.Builder(project).setFile(hashFile).getDelete().execute();    
   }    
   
 }

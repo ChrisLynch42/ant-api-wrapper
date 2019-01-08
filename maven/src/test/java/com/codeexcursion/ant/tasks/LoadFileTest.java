@@ -34,7 +34,7 @@ public class LoadFileTest {
     String sourceDir =  TestHelper.TREE_DIR;
     String sourceFile = sourceDir + fileName;
 
-    Assert.assertTrue("Source file doesn't exist.", new Available(project).setFileC(sourceFile).eval());    
+    Assert.assertTrue("Source file doesn't exist.", new Available.Builder(project).setFile(sourceFile).getAvailable().eval());    
     
     TokenFilter tokenFilter = new TokenFilter(project).addContainsStringC("password=\"").addReplaceRegexC("\\s*password=\\\"", "")
     		.addReplaceRegexC("\"", "");
@@ -59,7 +59,7 @@ public class LoadFileTest {
     String sourceDir =  TestHelper.TREE_DIR;
     String sourceFile = sourceDir + fileName;
 
-    Assert.assertTrue("Source file doesn't exist.", new Available(project).setFileC(sourceFile).eval());    
+    Assert.assertTrue("Source file doesn't exist.", new Available.Builder(project).setFile(sourceFile).getAvailable().eval());    
     
     TokenFilter tokenFilter = new TokenFilter(project).addContainsStringC("password='").addReplaceRegexC("\\s*password='", "")
     		.addReplaceRegexC("\'", "");

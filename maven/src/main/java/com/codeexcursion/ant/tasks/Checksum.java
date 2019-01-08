@@ -18,38 +18,49 @@ import org.apache.tools.ant.Project;
  */
 public class Checksum extends org.apache.tools.ant.taskdefs.Checksum {
 
-  public Checksum(
-    Project project
-  ) {
-	Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
-    super.setProject(project);    
-  }
-
-  /**
-   * Encapsulates the parent setAlgorithm method.
-   * @return this object
-   */    
-  public Checksum setAlgorithmC(String algorithm) {
-    super.setAlgorithm(algorithm);
-    return this;
-  }
-
-  /**
-   * Encapsulates the parent setToDir method.
-   * @return this object
-   */     
-  public Checksum setTodirC(String directory) {
-    super.setTodir(PathsUtil.getFile(directory));
-    return this;
-  }
+  private Checksum() {}
   
-  /**
-   * Encapsulates the parent setFile method.
-   * @return this object
-   */    
-  public Checksum setFileC(String dosiero) {
-    super.setFile(PathsUtil.getFile(dosiero));
-    return this;
-  }
   
+  
+  public static class Builder {
+    private Checksum checksum;
+    public Builder(
+      Project project
+    ) {
+      Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
+      checksum = new Checksum();
+      checksum.setProject(project);    
+    }
+  
+    /**
+     * Encapsulates the setAlgorithm method.
+     * @return this object
+     */    
+    public Builder setAlgorithm(String algorithm) {
+      checksum.setAlgorithm(algorithm);
+      return this;
+    }
+  
+    /**
+     * Encapsulates the setToDir method.
+     * @return this object
+     */     
+    public Builder setTodir(String directory) {
+      checksum.setTodir(PathsUtil.getFile(directory));
+      return this;
+    }
+    
+    /**
+     * Encapsulates the setFile method.
+     * @return this object
+     */    
+    public Builder setFile(String dosiero) {
+      checksum.setFile(PathsUtil.getFile(dosiero));
+      return this;
+    }
+    
+    public Checksum getChecksum() {
+      return checksum;
+    }
+  }
 }
