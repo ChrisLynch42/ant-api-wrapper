@@ -15,14 +15,28 @@ import org.apache.tools.ant.filters.ChainableReader;
  */
 public class FilterChain extends org.apache.tools.ant.types.FilterChain {
     
+  private FilterChain() {}
+  
+  public static class Builder {
+    private FilterChain filterChain;
+    
+    
+    public Builder() {
+      filterChain = new FilterChain();
+    }
+    
     /**
-     * Encapsulates the parent add method.
+     * Encapsulates the add method.
      * @param filter.
      * @return this object
      */     
-    public FilterChain addC(ChainableReader filter) {
-    	super.add(filter);
+    public Builder add(ChainableReader filter) {
+      filterChain.add(filter);
       return this;
     }
         
+    public FilterChain getFilterChain() {
+      return filterChain;
+    }
+  }
 }

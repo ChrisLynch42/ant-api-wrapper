@@ -36,12 +36,12 @@ public class LoadFileTest {
 
     Assert.assertTrue("Source file doesn't exist.", new Available.Builder(project).setFile(sourceFile).getAvailable().eval());    
     
-    TokenFilter tokenFilter = new TokenFilter(project).addContainsStringC("password=\"").addReplaceRegexC("\\s*password=\\\"", "")
-    		.addReplaceRegexC("\"", "");
+    TokenFilter tokenFilter = new TokenFilter.Builder(project).addContainsString("password=\"").addReplaceRegex("\\s*password=\\\"", "")
+    		.addReplaceRegex("\"", "").getTokenFilter();
     
-    Optional<String> result = new LoadFile(project).setSrcFileC(sourceFile)
-    		.addFilterChainC(new FilterChain().addC(tokenFilter).addC(new StripLineBreaks()))
-    		.executeC().getResult();
+    Optional<String> result = new LoadFile.Builder(project).setSrcFile(sourceFile)
+    		.addFilterChain(new FilterChain.Builder().add(tokenFilter).add(new StripLineBreaks()).getFilterChain())
+    		.getLoadFile().executeResult();
 
     Assert.assertTrue("Result should have a value.", result.isPresent());    
     Assert.assertEquals("Result should match:" + expectedResult, expectedResult, result.get() );    
@@ -61,12 +61,12 @@ public class LoadFileTest {
 
     Assert.assertTrue("Source file doesn't exist.", new Available.Builder(project).setFile(sourceFile).getAvailable().eval());    
     
-    TokenFilter tokenFilter = new TokenFilter(project).addContainsStringC("password='").addReplaceRegexC("\\s*password='", "")
-    		.addReplaceRegexC("\'", "");
+    TokenFilter tokenFilter = new TokenFilter.Builder(project).addContainsString("password='").addReplaceRegex("\\s*password='", "")
+    		.addReplaceRegex("\'", "").getTokenFilter();
     
-    Optional<String> result = new LoadFile(project).setSrcFileC(sourceFile)
-    		.addFilterChainC(new FilterChain().addC(tokenFilter).addC(new StripLineBreaks()))
-    		.executeC().getResult();
+    Optional<String> result = new LoadFile.Builder(project).setSrcFile(sourceFile)
+    		.addFilterChain(new FilterChain.Builder().add(tokenFilter).add(new StripLineBreaks()).getFilterChain())
+    		.getLoadFile().executeResult();
 
     Assert.assertTrue("Result should have a value.", result.isPresent());    
     Assert.assertEquals("Result should match:" + expectedResult, expectedResult, result.get() );    

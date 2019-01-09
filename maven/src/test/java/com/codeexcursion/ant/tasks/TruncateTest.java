@@ -29,7 +29,7 @@ public class TruncateTest {
     
     String destDir = TestHelper.BASE_DIR + "truncateTest/";
     String sourceDir =  TestHelper.TREE_DIR;
-    new Mkdir(project).setDirC(destDir).execute();
+    new Mkdir.Builder(project).setDir(destDir).getMkdir().execute();
 
     String filename = "test.txt";
     String sourceFile = sourceDir + filename;
@@ -40,9 +40,9 @@ public class TruncateTest {
     .setFile(sourceFile).getCopy()
     .execute();    
         
-    new Truncate(project).setFileC(changedFile).execute();
+    new Truncate.Builder(project).setFile(changedFile).getTruncate().execute();
     
-    Assert.assertTrue("File size greater than 0.", new Length().setFileC(changedFile).setWhenC("equal").setLengthC(0).eval());
+    Assert.assertTrue("File size greater than 0.", new Length.Builder().setFile(changedFile).setWhen("equal").setLength(0).getLength().eval());
 
   }  
 

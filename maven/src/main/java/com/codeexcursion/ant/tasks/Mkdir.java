@@ -6,6 +6,8 @@
 package com.codeexcursion.ant.tasks;
 
 import java.io.File;
+import java.util.Optional;
+
 import com.codeexcursion.ant.util.PathsUtil;
 import org.apache.tools.ant.Project;
 
@@ -15,21 +17,33 @@ import org.apache.tools.ant.Project;
  */
 public class Mkdir extends org.apache.tools.ant.taskdefs.Mkdir {
 
-  public Mkdir(
-    Project project
-  ) {
-    super.setProject(project);
-
-  }
-
+  private Mkdir() {}
   
-  /**
-   * Encapsulates the parent setDir method.
-   * @param newDir - directory to be created.
-   * @return this object
-   */     
-  public Mkdir setDirC(String newDir) {
-    super.setDir(PathsUtil.getFile(newDir));
-    return this;
+  public static class Builder {
+    private Mkdir mkdir;
+    
+    public Builder(
+      Project project
+    ) {
+      Optional.ofNullable(project).orElseThrow(IllegalArgumentException::new);
+      mkdir = new Mkdir();
+      mkdir.setProject(project);
+  
+    }
+  
+    
+    /**
+     * Encapsulates the parent setDir method.
+     * @param newDir - directory to be created.
+     * @return this object
+     */     
+    public Builder setDir(String newDir) {
+      mkdir.setDir(PathsUtil.getFile(newDir));
+      return this;
+    }
+    
+    public Mkdir getMkdir() {
+      return mkdir;
+    }
   }
 }

@@ -27,11 +27,10 @@ public class DirSetTest {
   public void testFindFiles() {
     Project project = new Project();
     project.setName("Directory set unit test.");
-    DirSet dirSet = new DirSet(project);
-
     String sourceDir = TestHelper.TREE_DIR;
 
-    dirSet.setDirC(sourceDir).setIncludesC("**/*");
+    DirSet dirSet = new DirSet.Builder(project).setDir(sourceDir).setIncludes("**/*").getDirSet();
+
 
     List<String> directories = dirSet.stream()
     .filter(Objects::nonNull)

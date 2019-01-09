@@ -28,7 +28,7 @@ public class ReplaceTest {
     
     String destDir = TestHelper.BASE_DIR + "replaceTest/";
     String sourceDir =  TestHelper.TREE_DIR;
-    new Mkdir(project).setDirC(destDir).execute();
+    new Mkdir.Builder(project).setDir(destDir).getMkdir().execute();
 
     String filename = "test.txt";
     String sourceFile = sourceDir + filename;
@@ -40,8 +40,8 @@ public class ReplaceTest {
       .setFile(sourceFile).getCopy()
       .execute();    
     
-    new Replace(project).setFileC(destDir + filename).setTokenC("Test").setValueC("Replace").execute();
-    Assert.assertTrue("Files did not match.", new FilesMatch().setFile1C(compareFile).setFile2C(changedFile).eval());
+    new Replace.Builder(project).setFile(destDir + filename).setToken("Test").setValue("Replace").getReplace().execute();
+    Assert.assertTrue("Files did not match.", new FilesMatch.Builder().setFile1(compareFile).setFile2(changedFile).getFilesMatch().eval());
 
   }  
 

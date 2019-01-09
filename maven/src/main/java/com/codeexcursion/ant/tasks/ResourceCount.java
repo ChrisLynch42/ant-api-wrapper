@@ -19,33 +19,44 @@ import org.apache.tools.ant.types.ResourceCollection;
  */
 public class ResourceCount extends org.apache.tools.ant.taskdefs.ResourceCount {
 
-  public ResourceCount(
-    Project project
-  ) {
-	Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
-	super.setProject(project);
+  private ResourceCount() {}
+  
+  public static class Builder {
+    
+    private ResourceCount resourceCount;
+    
+    public Builder(
+      Project project
+    ) {
+    	Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
+    	resourceCount = new ResourceCount();
+    	resourceCount.setProject(project);
+    }
+  
+    
+    /**
+     * Encapsulates the parent add method.
+     * @param time
+     * @return this object
+     */  
+    public Builder add(ResourceCollection resources) {
+      resourceCount.add(resources);
+      return this;
+    }  
+  
+    /**
+     * Encapsulates the parent setCount method.
+     * @param expectedCount - expected results
+     * @return this object
+     */  
+    public Builder setCount(int expectedCount) {
+      resourceCount.setCount(expectedCount);
+      return this;
+    }
+    
+    public ResourceCount getResourceCount() {
+      return resourceCount;
+    }
+  
   }
-
-  
-  /**
-   * Encapsulates the parent add method.
-   * @param time
-   * @return this object
-   */  
-  public ResourceCount addC(ResourceCollection resources) {
-    super.add(resources);
-    return this;
-  }  
-
-  /**
-   * Encapsulates the parent setCount method.
-   * @param expectedCount - expected results
-   * @return this object
-   */  
-  public ResourceCount setCountC(int expectedCount) {
-    super.setCount(expectedCount);
-    return this;
-  }  
-  
-  
 }

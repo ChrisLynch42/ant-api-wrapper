@@ -23,13 +23,13 @@ public class HasFreeSpaceTest {
   
   @Test
   public void testIsValid()  throws IOException {
-    Assert.assertTrue("Root did not have 10K disk space free.", new HasFreeSpace().setPartitionC("/").setNeededC("10K").eval());
+    Assert.assertTrue("Root did not have 10K disk space free.", new HasFreeSpace.Builder().setPartition("/").setNeeded("10K").getHasFreeSpace().eval());
   }  
 
   
   @Test
   public void testNotValid() throws IOException {
-    Assert.assertFalse("Root should not have 1000G disk space free.", new HasFreeSpace().setPartitionC("/").setNeededC("1000G").eval());
+    Assert.assertFalse("Root should not have 1000G disk space free.", new HasFreeSpace.Builder().setPartition("/").setNeeded("1000G").getHasFreeSpace().eval());
   }  
   
   

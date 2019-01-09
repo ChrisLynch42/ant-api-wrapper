@@ -20,63 +20,78 @@ import org.apache.tools.ant.types.FilterChain;
  */
 public class LoadFile extends org.apache.tools.ant.taskdefs.LoadFile {
 
-	private String propertyName = "loadFileResult";
+	private static final String PROPERTY_NAME = "loadFileResult";
 	
-  public LoadFile(
-    Project project
-  ) {
-		Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
-		super.setProject(project);
-		super.setProperty(propertyName);
-  }
-
-  
+	private LoadFile() {}
+	
   /**
-   * Encapsulates the parent setProperty method.
-   * @param file - The file to be loaded
-   * @return
+   * Encapsulates the parent execute method and returns a result.
+   * @return Optional string containing the result.
    */  
-  public LoadFile setPropertyC(String propertyName) {
-    super.setProperty(propertyName);
-    return this;
-  }  
-  
-  /**
-   * Encapsulates the parent setSrcFile method.
-   * @param file - The file to be loaded
-   * @return
-   */  
-  public LoadFile setSrcFileC(String file) {
-    super.setSrcFile(PathsUtil.getFile(file));
-    return this;
-  }  
-
-  /**
-   * Encapsulates the parent setMaxWait method.
-   * @param time
-   * @return
-   */  
-  public LoadFile addFilterChainC(FilterChain filter) {
-    super.addFilterChain(filter);
-    return this;
-  }  
-  
-  /**
-   * Encapsulates the parent replaceRegex method.
-   * @return this object.
-   */  
-  public LoadFile executeC() {
-  	super.execute();
-    return this;
+  public Optional<String> executeResult() {
+    super.execute();
+    return getResult();
   }   
 
   /**
-   * Encapsulates the parent replaceRegex method.
-   * @return this object.
+   * Return the result form the project.
+   * @return Optional string containing the result.
    */  
   public Optional<String> getResult() {
-  	return Optional.ofNullable(getProject().getProperty(propertyName));
-  }   
+    return Optional.ofNullable(getProject().getProperty(PROPERTY_NAME));
+  }	
+	
+	
+	/**
+	 * Defaults to setProperty("loadFileResult").
+	 * @author chris
+	 */
+	public static class Builder {
+	  private LoadFile loadFile;
+	  
+    public Builder(
+      Project project
+    ) {
+  		Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
+  		loadFile = new LoadFile();
+  		loadFile.setProject(project);
+  		loadFile.setProperty(PROPERTY_NAME);
+    }
   
+    
+    /**
+     * Encapsulates the parent setProperty method.
+     * @param file - The file to be loaded
+     * @return
+     */  
+    public Builder setProperty(String propertyName) {
+      loadFile.setProperty(propertyName);
+      return this;
+    }  
+    
+    /**
+     * Encapsulates the parent setSrcFile method.
+     * @param file - The file to be loaded
+     * @return
+     */  
+    public Builder setSrcFile(String file) {
+      loadFile.setSrcFile(PathsUtil.getFile(file));
+      return this;
+    }  
   
+    /**
+     * Encapsulates the parent setMaxWait method.
+     * @param time
+     * @return
+     */  
+    public Builder addFilterChain(FilterChain filter) {
+      loadFile.addFilterChain(filter);
+      return this;
+    }  
+    
+    public LoadFile getLoadFile() {
+      return loadFile;
+    }
+  
+	}
 }

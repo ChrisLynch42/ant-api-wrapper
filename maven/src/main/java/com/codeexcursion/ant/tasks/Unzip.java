@@ -6,6 +6,9 @@
 package com.codeexcursion.ant.tasks;
 
 import com.codeexcursion.ant.util.PathsUtil;
+
+import java.util.Optional;
+
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Expand;
 
@@ -15,31 +18,43 @@ import org.apache.tools.ant.taskdefs.Expand;
  */
 public class Unzip extends org.apache.tools.ant.taskdefs.Expand {
 
-  public Unzip(
-    Project project
-  ) {
-    super.setProject(project);
-    super.setOverwrite(true);
-  }
-
-  public Unzip setOverwriteC(boolean overwrite) {
-  	super.setOverwrite(overwrite);
-    return this;
-  }
-
-  public Unzip setDestC(String destDir) {
-  	super.setDest(PathsUtil.getFile(destDir));
-    return this;
-  }
+  private Unzip() {}
   
-  public Unzip setSrcC(String sourceFile) {
-  	super.setSrc(PathsUtil.getFile(sourceFile));
-    return this;
-  }
+  public static class Builder {
+    private Unzip unzip;
+    
+    public Builder(
+      Project project
+    ) {
+      Optional.ofNullable(project).orElseThrow(IllegalArgumentException::new);
+      unzip = new Unzip();
+      unzip.setProject(project);
+      unzip.setOverwrite(true);
+    }
   
-  public Unzip addFilesetC(String sourceDir, String filenamePattern) {
-  	super.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));;
-    return this;
-  }
+    public Builder setOverwrite(boolean overwrite) {
+      unzip.setOverwrite(overwrite);
+      return this;
+    }
   
+    public Builder setDest(String destDir) {
+      unzip.setDest(PathsUtil.getFile(destDir));
+      return this;
+    }
+    
+    public Builder setSrc(String sourceFile) {
+      unzip.setSrc(PathsUtil.getFile(sourceFile));
+      return this;
+    }
+    
+    public Builder addFileset(String sourceDir, String filenamePattern) {
+      unzip.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));;
+      return this;
+    }
+    
+    public Unzip getUnzip() {
+      return unzip;
+    }
+  
+  }
 }

@@ -6,6 +6,9 @@
 package com.codeexcursion.ant.tasks;
 
 import com.codeexcursion.ant.util.PathsUtil;
+
+import java.util.Optional;
+
 import org.apache.tools.ant.Project;
 
 /**
@@ -13,25 +16,37 @@ import org.apache.tools.ant.Project;
  * @author chris
  */
 public class Replace extends org.apache.tools.ant.taskdefs.Replace {
-  public Replace(
-    Project project
-  ) {
-    super.setProject(project);
-  }
-
-  public Replace setTokenC(String token) {
-  	super.setToken(token);
-    return this;
-  }
-
-  public Replace setValueC(String value) {
-  	super.setValue(value);
-    return this;
-  }
-
-  public Replace setFileC(String targetFile) {
-  	super.setFile(PathsUtil.getFile(targetFile));
-    return this;
-  }
   
+  private Replace() {}
+  
+  public static class Builder {
+    private Replace replace;
+    
+    public Builder(
+      Project project
+    ) {
+      Optional.ofNullable(project).orElseThrow(IllegalArgumentException::new);
+      replace = new Replace();
+      replace.setProject(project);
+    }
+  
+    public Builder setToken(String token) {
+      replace.setToken(token);
+      return this;
+    }
+  
+    public Builder setValue(String value) {
+      replace.setValue(value);
+      return this;
+    }
+  
+    public Builder setFile(String targetFile) {
+      replace.setFile(PathsUtil.getFile(targetFile));
+      return this;
+    }
+    
+    public Replace getReplace() {
+      return replace;
+    }
+  }
 }

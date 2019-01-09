@@ -23,13 +23,13 @@ public class JavaVersionTest {
   
   @Test
   public void testIsValid()  throws IOException {
-    Assert.assertTrue("Should have version greater than or equal to 7.", new JavaVersion().setAtLeastC("1.7").eval());
+    Assert.assertTrue("Should have version greater than or equal to 7.", new JavaVersion.Builder().setAtLeast("1.7").getJavaVersion().eval());
   }  
 
   
   @Test
   public void testNotValid() throws IOException {
-    Assert.assertFalse("Should not have a Java Version greater than or equal to 100.", new JavaVersion().setAtLeastC("100").eval());
+    Assert.assertFalse("Should not have a Java Version greater than or equal to 100.", new JavaVersion.Builder().setAtLeast("100").getJavaVersion().eval());
   }  
   
   

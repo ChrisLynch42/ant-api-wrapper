@@ -18,25 +18,38 @@ import org.apache.tools.ant.Project;
  */
 public class FilesMatch extends org.apache.tools.ant.taskdefs.condition.FilesMatch {
 
-  /**
-   * Encapsulates the parent setFile1 method.
-   * @param file1
-   * @return this object
-   */  
-  public FilesMatch setFile1C(String file1) {
-    super.setFile1(PathsUtil.getFile(file1));
-    return this;
-  }  
-
-  /**
-   * Encapsulates the parent setFile2 method.
-   * @param file2
-   * @return this object
-   */  
-  public FilesMatch setFile2C(String file2) {
-    super.setFile2(PathsUtil.getFile(file2));
-    return this;
-  }  
+  private FilesMatch() {}
   
+  public static class Builder {
+    private FilesMatch filesMatch;
+    
+    
+    public Builder() {
+      filesMatch = new FilesMatch();
+    }
+    /**
+     * Encapsulates the parent setFile1 method.
+     * @param file1
+     * @return this object
+     */  
+    public Builder setFile1(String file1) {
+      filesMatch.setFile1(PathsUtil.getFile(file1));
+      return this;
+    }  
   
+    /**
+     * Encapsulates the parent setFile2 method.
+     * @param file2
+     * @return this object
+     */  
+    public Builder setFile2(String file2) {
+      filesMatch.setFile2(PathsUtil.getFile(file2));
+      return this;
+    }  
+    
+    public FilesMatch getFilesMatch() {
+      return filesMatch;
+    }
+    
+  }
 }

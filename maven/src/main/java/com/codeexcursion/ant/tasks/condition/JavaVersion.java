@@ -18,15 +18,26 @@ import org.apache.tools.ant.Project;
  */
 public class JavaVersion extends org.apache.tools.ant.taskdefs.condition.JavaVersion {
 
-
-  /**
-   * Encapsulates the parent atLeast method.
-   * @param version - the minimum version of Java.
-   * @return this object
-   */  
-  public JavaVersion setAtLeastC(String version) {
-    super.setAtLeast(version);
-    return this;
-  }  
+  private JavaVersion() {}
   
+  public static class Builder {
+    private JavaVersion javaVersion;
+    
+    public Builder() {
+      javaVersion = new JavaVersion();
+    }
+    /**
+     * Encapsulates the parent atLeast method.
+     * @param version - the minimum version of Java.
+     * @return this object
+     */  
+    public Builder setAtLeast(String version) {
+      javaVersion.setAtLeast(version);
+      return this;
+    }  
+    
+    public JavaVersion getJavaVersion() {
+      return javaVersion;
+    }
+  }
 }

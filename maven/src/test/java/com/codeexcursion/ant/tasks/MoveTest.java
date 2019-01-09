@@ -24,8 +24,8 @@ public class MoveTest {
     String destDir = TestHelper.BASE_DIR + "copyDest/";
     String moveDestDir = TestHelper.BASE_DIR + "moveDest/";
     String sourceDir =  TestHelper.TREE_DIR;
-    new Mkdir(project).setDirC(destDir).execute();
-    new Mkdir(project).setDirC(moveDestDir).execute();
+    new Mkdir.Builder(project).setDir(destDir).getMkdir().execute();
+    new Mkdir.Builder(project).setDir(moveDestDir).getMkdir().execute();
 
     new Copy.Builder(project)
       .setTodir(destDir)
@@ -51,8 +51,8 @@ public class MoveTest {
     String destDir = TestHelper.BASE_DIR + "copyDest/";
     String moveDestDir = TestHelper.BASE_DIR + "moveDest/";
     String sourceDir =  TestHelper.TREE_DIR;
-    new Mkdir(project).setDirC(destDir).execute();
-    new Mkdir(project).setDirC(moveDestDir).execute();
+    new Mkdir.Builder(project).setDir(destDir).getMkdir().execute();
+    new Mkdir.Builder(project).setDir(moveDestDir).getMkdir().execute();
 
     new Copy.Builder(project)
       .setTodir(destDir)

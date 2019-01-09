@@ -30,20 +30,20 @@ public class FixCRLFTest {
     String sourceDir =  TestHelper.TREE_DIR;
     String sourceFile = sourceDir + "/" + fileName;
     
-    new Mkdir(project).setDirC(destDir).execute();
+    new Mkdir.Builder(project).setDir(destDir).getMkdir().execute();
 
     new Copy.Builder(project)
       .setTodir(destDir)
       .addFileset(sourceDir, "**/*").getCopy()
       .execute();
 
-    Assert.assertTrue("Files should match.", new FilesMatch().setFile1C(sourceFile).setFile2C(destFile).eval());    
+    Assert.assertTrue("Files should match.", new FilesMatch.Builder().setFile1(sourceFile).setFile2(destFile).getFilesMatch().eval());    
     
     new FixCRLF.Builder(project).setSrcdir(destDir).addFilename("test.txt").setEol("dos").getFixCRLF().execute();
-    Assert.assertFalse("Files should match.", new FilesMatch().setFile1C(sourceFile).setFile2C(destFile).eval());
+    Assert.assertFalse("Files should match.", new FilesMatch.Builder().setFile1(sourceFile).setFile2(destFile).getFilesMatch().eval());
     
     new FixCRLF.Builder(project).setSrcdir(destDir).addFilename("test.txt").setEol("unix").getFixCRLF().execute();
-    Assert.assertTrue("Files should match.", new FilesMatch().setFile1C(sourceFile).setFile2C(destFile).eval());
+    Assert.assertTrue("Files should match.", new FilesMatch.Builder().setFile1(sourceFile).setFile2(destFile).getFilesMatch().eval());
     
     new Delete.Builder(project).setDir(destDir).getDelete().execute();
   }

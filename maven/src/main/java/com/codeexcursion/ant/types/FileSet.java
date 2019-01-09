@@ -6,6 +6,9 @@
 package com.codeexcursion.ant.types;
 
 import com.codeexcursion.ant.util.PathsUtil;
+
+import java.util.Optional;
+
 import org.apache.tools.ant.Project;
 
 /**
@@ -14,30 +17,41 @@ import org.apache.tools.ant.Project;
  */
 public class FileSet extends org.apache.tools.ant.types.FileSet {
     
-    public FileSet(Project project) {
-        super.setProject(project);
+  private FileSet() {}
+  
+  public static class Builder {
+    private FileSet fileSet; 
+  
+    public Builder(Project project) {
+      Optional.ofNullable(project).orElseThrow(IllegalArgumentException::new);
+      fileSet = new FileSet();
+      fileSet.setProject(project);
     }
     
     
-    public FileSet setDirC(String dir) {
-    	super.setDir(PathsUtil.getFile(dir));
+    public Builder setDir(String dir) {
+      fileSet.setDir(PathsUtil.getFile(dir));
       return this;
     }
 
-    public FileSet setFileC(String file) {
-    	super.setDir(PathsUtil.getFile(file));
+    public Builder setFile(String file) {
+      fileSet.setDir(PathsUtil.getFile(file));
       return this;
     }
     
     
-    public FileSet setIncludesC(java.lang.String includes) {
-    	super.setIncludes(includes);
+    public Builder setIncludes(java.lang.String includes) {
+      fileSet.setIncludes(includes);
       return this;
     }
     
-    public FileSet setExcludesC(java.lang.String excludes) {
-    	super.setIncludes(excludes);
+    public Builder setExcludes(java.lang.String excludes) {
+      fileSet.setIncludes(excludes);
       return this;
     }
     
+    public FileSet getFileSet() {
+      return fileSet;
+    }
+  }  
 }

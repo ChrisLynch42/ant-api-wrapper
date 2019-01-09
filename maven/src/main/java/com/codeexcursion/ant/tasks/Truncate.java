@@ -8,6 +8,7 @@ package com.codeexcursion.ant.tasks;
 import com.codeexcursion.ant.util.PathsUtil;
 
 import java.io.File;
+import java.util.Optional;
 
 import org.apache.tools.ant.Project;
 
@@ -17,33 +18,47 @@ import org.apache.tools.ant.Project;
  */
 public class Truncate extends org.apache.tools.ant.taskdefs.Truncate {
 
-  public Truncate(
-    Project project
-  ) {
-
-    super.setProject(project);
-    super.setCreate(false);
-  }
-
-
-  /**
-   * Encapsulates the parent setMaxWait method.
-   * @param file - The file to be truncated.
-   * @return this object
-   */    
-  public Truncate setFileC(String file) {
-  	super.setFile(PathsUtil.getFile(file));
-	  return this;
-  }
-
-  /**
-   * Encapsulates the parent setCreate method.
-   * @param create
-   * @return this object
-   */    
-  public Truncate setCreateC(boolean create) {
-  	super.setCreate(create);
-	  return this;
-  }  
+  private Truncate() {}
   
+  public static class Builder {
+    private Truncate truncate;
+    
+    /**
+     * Defaults to create(false).
+     * @author chris
+     */
+    public Builder(
+      Project project
+    ) {
+      Optional.ofNullable(project).orElseThrow(IllegalArgumentException::new);
+      truncate = new Truncate();
+      truncate.setProject(project);
+      truncate.setCreate(false);
+    }
+  
+  
+    /**
+     * Encapsulates the setMaxWait method.
+     * @param file - The file to be truncated.
+     * @return this object
+     */    
+    public Builder setFile(String file) {
+      truncate.setFile(PathsUtil.getFile(file));
+  	  return this;
+    }
+  
+    /**
+     * Encapsulates the parent setCreate method.
+     * @param create
+     * @return this object
+     */    
+    public Builder setCreate(boolean create) {
+      truncate.setCreate(create);
+  	  return this;
+    }  
+    
+    public Truncate getTruncate() {
+      return truncate;
+    }
+  }
 }

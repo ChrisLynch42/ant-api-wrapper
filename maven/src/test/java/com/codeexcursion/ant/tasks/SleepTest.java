@@ -26,7 +26,7 @@ public class SleepTest {
     
     long start = System.currentTimeMillis();
 
-    new Sleep(project).setMillisecondsC(500).execute();
+    new Sleep.Builder(project).setMilliseconds(500).getSleep().execute();
 
     long end = System.currentTimeMillis();
     long result = end - start;

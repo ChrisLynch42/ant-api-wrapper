@@ -20,26 +20,43 @@ public class Tstamp extends org.apache.tools.ant.taskdefs.Tstamp {
 
   public static final String PROPERTY_NAME = "timestamp";
   
-  public Tstamp(
-    Project project,
-    String pattern
-  ) {
-		Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
-		Optional.ofNullable(pattern).orElseThrow(() -> new BuildException("Task requires a valid pattern."));
-	super.setProject(project);
-	Tstamp.CustomFormat format = super.createFormat();
-	format.setPattern(pattern);
-	format.setProperty(PROPERTY_NAME);
+  private Tstamp() {}
+  
+  
+  public String executeResult() {
+    super.execute();
+    return getResult();
+  }
+  
+  public String getResult() {
+    return getProject().getProperty(PROPERTY_NAME);
   }  
   
-  public Tstamp executeC() {
-	  this.execute();
-	  return this;
-  }
+  /**
+  *  Defaults to setProperty(PROPERTY_NAME)
+  * @author chris
+  */
   
+  public static class Builder {
+    private Tstamp tstamp;
 
-  public String getResult() {
-	  return getProject().getProperty(PROPERTY_NAME);
+    public Builder(
+      Project project,
+      String pattern
+    ) {
+  		Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
+  		Optional.ofNullable(pattern).orElseThrow(() -> new BuildException("Task requires a valid pattern."));
+  		tstamp = new Tstamp();
+  		
+  		tstamp.setProject(project);
+    	Tstamp.CustomFormat format = tstamp.createFormat();
+    	format.setPattern(pattern);
+    	format.setProperty(PROPERTY_NAME);
+    }  
+    
+    public Tstamp getTstamp() {
+      return tstamp;
+    }
+    
   }
-  
 }

@@ -6,6 +6,9 @@
 package com.codeexcursion.ant.tasks;
 
 import com.codeexcursion.ant.util.PathsUtil;
+
+import java.util.Optional;
+
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Expand;
 
@@ -15,20 +18,33 @@ import org.apache.tools.ant.taskdefs.Expand;
  */
 public class Zip extends org.apache.tools.ant.taskdefs.Zip {
 
-  public Zip(
-    Project project
-  ) {
-    super.setProject(project);
-  }
-
-  public Zip setDestFileC(String destinationFile) {
-  	super.setDestFile(PathsUtil.getFile(destinationFile));
-    return this;
-  }
+  private Zip() {}
   
-  public Zip addFilesetC(String sourceDir, String filenamePattern) {
-  	super.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));;
-    return this;
+  public static class Builder {
+    private Zip zip;
+    
+    public Builder (
+      Project project
+    ) {
+      Optional.ofNullable(project).orElseThrow(IllegalArgumentException::new);
+      zip = new Zip();
+      zip.setProject(project);
+    }
+  
+    public Builder setDestFileC(String destinationFile) {
+      zip.setDestFile(PathsUtil.getFile(destinationFile));
+      return this;
+    }
+    
+    public Builder addFilesetC(String sourceDir, String filenamePattern) {
+      zip.addFileset(PathsUtil.getFileSet(sourceDir, filenamePattern));;
+      return this;
+    }
+    
+    public Zip getZip() {
+      return zip;
+    }
+    
   }
   
 }

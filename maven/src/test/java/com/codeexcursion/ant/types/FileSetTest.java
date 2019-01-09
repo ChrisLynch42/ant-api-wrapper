@@ -27,12 +27,9 @@ public class FileSetTest {
   public void testFindFiles() {
     Project project = new Project();
     project.setName("File set unit test.");
-    FileSet fileSet = new FileSet(project);
-
     String sourceDir = TestHelper.TREE_DIR;
 
-    fileSet.setDirC(sourceDir);
-    fileSet.setIncludesC("**/*");
+    FileSet fileSet = new FileSet.Builder(project).setDir(sourceDir).setIncludes("**/*").getFileSet();
 
     List<String> files = fileSet.stream()
     .filter(Objects::nonNull)

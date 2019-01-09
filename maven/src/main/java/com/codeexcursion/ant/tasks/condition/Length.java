@@ -18,37 +18,50 @@ import org.apache.tools.ant.Project;
  */
 public class Length extends org.apache.tools.ant.taskdefs.Length {
 
-  /**
-   * Encapsulates the parent setFile method.
-   * @param file1
-   * @return this object
-   */  
-  public Length setFileC(String file1) {
-    super.setFile(PathsUtil.getFile(file1));
-    return this;
-  }  
-
-  /**
-   * Encapsulates the parent setLength method.
-   * @param length
-   * @return this object
-   */  
-  public Length setLengthC(int length) {
-    super.setLength(length);
-    return this;
-  }  
+  private Length() {}
   
-  /**
-   * Encapsulates the parent setWhen method.
-   * @param when
-   * @return this object
-   */  
-  public Length setWhenC(String when) {
-  	Length.When comparison = new Length.When();
-  	comparison.setValue(when);
-    super.setWhen(comparison);
-    return this;
-  }  
-
+  public static class Builder {
+    private Length length;
+    
+    public Builder() {
+      length = new Length();
+    }
+    /**
+     * Encapsulates the setFile method.
+     * @param file1
+     * @return this object
+     */  
+    public Builder setFile(String file1) {
+      length.setFile(PathsUtil.getFile(file1));
+      return this;
+    }  
   
+    /**
+     * Encapsulates the setLength method.
+     * @param length
+     * @return this object
+     */  
+    public Builder setLength(int lengthExpected) {
+      length.setLength(lengthExpected);
+      return this;
+    }  
+    
+    /**
+     * Encapsulates the setWhen method.
+     * @param when
+     * @return this object
+     */  
+    public Builder setWhen(String when) {
+    	Length.When comparison = new Length.When();
+    	comparison.setValue(when);
+    	length.setWhen(comparison);
+      return this;
+    }  
+
+    
+    public Length getLength() {
+      return length;
+    }
+  }
 }
+

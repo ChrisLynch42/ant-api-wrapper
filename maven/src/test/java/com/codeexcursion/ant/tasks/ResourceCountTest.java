@@ -20,11 +20,10 @@ public class ResourceCountTest {
     project.setName("Flatten copy unit test.");
     
     String sourceDir =  TestHelper.TREE_DIR + "test";
-    FileSet fileSet = new FileSet(project);
-    fileSet.setDirC(sourceDir).setIncludesC("*.txt");
+    FileSet fileSet = new FileSet.Builder(project).setDir(sourceDir).setIncludes("*.txt").getFileSet();
     
-    Assert.assertTrue("Resource count should be 3.", new ResourceCount(project).addC(fileSet).setCountC(3).eval());
-    Assert.assertFalse("Resource count should be false.", new ResourceCount(project).addC(fileSet).setCountC(4).eval());
+    Assert.assertTrue("Resource count should be 3.", new ResourceCount.Builder(project).add(fileSet).setCount(3).getResourceCount().eval());
+    Assert.assertFalse("Resource count should be false.", new ResourceCount.Builder(project).add(fileSet).setCount(4).getResourceCount().eval());
   }
 
    

@@ -25,7 +25,7 @@ public class MkDirTest {
     if(Files.exists(Paths.get(destDir))) {
       new Delete.Builder(project).setQuiet(true).setDir(destDir).getDelete().execute();
     }
-    new Mkdir(project).setDirC(destDir).execute();
+    new Mkdir.Builder(project).setDir(destDir).getMkdir().execute();
     Assert.assertTrue("Directory " + destDir + " should exist.", Files.exists(Paths.get(destDir)));
 
     new Delete.Builder(project).setDir(destDir).getDelete().execute();
