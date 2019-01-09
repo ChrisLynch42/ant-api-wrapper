@@ -31,9 +31,21 @@ public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {
    * Encapsulates the parent execute method.
    * @return this object
    */    
+  @Override
   public void execute() {
+    getProject().setProperty(PROPERTY_NAME, null);
     try {
       super.execute();
+      System.out.println("execute");
+      System.out.println("execute");
+      System.out.println("execute");
+      System.out.println("execute");
+      System.out.println("execute");
+      System.out.println("execute");
+      System.out.println("execute");
+      System.out.println("execute");
+      System.out.println("execute");
+      System.out.println("execute");
     } catch (BuildException exception) {
       String message = "ExecTask failure executable=" + executableCopy 
       + "\narguments=" + argsCopy;
@@ -57,7 +69,8 @@ public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {
    * also maintains a copy of the executable to use in error
    * reporting.
    * @return this object
-   */  
+   */
+  @Override
   public void setExecutable(String executable) {
     super.setExecutable(executable);
     this.executableCopy=executable;
@@ -78,7 +91,7 @@ public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {
    * @return the output from the executable.
    */ 
   public String getOutput() {
-    return super.getProject().getProperty(PROPERTY_NAME);
+    return getProject().getProperty(PROPERTY_NAME);
   }   
   
   public static class Builder {

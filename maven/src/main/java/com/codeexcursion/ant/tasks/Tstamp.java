@@ -24,6 +24,7 @@ public class Tstamp extends org.apache.tools.ant.taskdefs.Tstamp {
   
   
   public String executeResult() {
+    getProject().setProperty(PROPERTY_NAME, null);
     super.execute();
     return getResult();
   }

@@ -29,6 +29,7 @@ public class LoadFile extends org.apache.tools.ant.taskdefs.LoadFile {
    * @return Optional string containing the result.
    */  
   public Optional<String> executeResult() {
+    getProject().setProperty(PROPERTY_NAME, null);
     super.execute();
     return getResult();
   }   

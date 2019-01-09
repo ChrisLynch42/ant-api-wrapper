@@ -28,24 +28,15 @@ public class ExecTaskTest {
         Assert.fail("Failed to detect operating system.");
     }
     
-    if(os.toLowerCase().contains("inux")) {
-        new Execute.Builder(project)
-          .setExecutable("ls")
-          .addArgument("-alrt")
-          .setOutputproperty(outputK3y).getExecute()
-          .execute();
-    }
-    
-    if(os.toLowerCase().contains("indow")) {
-        new Execute.Builder(project)
-          .setExecutable("dir")
-          .addArgument("/w")
-          .setOutputproperty(outputK3y).getExecute()
-          .execute();
-    }
+    new Execute.Builder(project)
+      .setExecutable("ls")
+      .addArgument("-alrt")
+      .setOutputproperty(outputK3y).getExecute()
+      .execute();
+
     
     Assert.assertNotNull("Output should not be null.", project.getProperty(outputK3y));
-    Assert.assertTrue("Output should not be null.", project.getProperty(outputK3y).length() > 5);
+    Assert.assertTrue("Output should not be empty.", project.getProperty(outputK3y).length() > 5);
   }
 
   @Test
@@ -60,7 +51,7 @@ public class ExecTaskTest {
     
     
     Assert.assertNotNull("Output should not be null.", result);
-    Assert.assertTrue("Output should not be null.", result.length() > 5);
+    Assert.assertTrue("Output should not be empty.", result.length() > 5);
   }  
   
 }
