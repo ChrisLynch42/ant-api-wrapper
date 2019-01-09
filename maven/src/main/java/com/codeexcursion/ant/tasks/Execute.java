@@ -36,16 +36,6 @@ public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {
     getProject().setProperty(PROPERTY_NAME, null);
     try {
       super.execute();
-      System.out.println("execute");
-      System.out.println("execute");
-      System.out.println("execute");
-      System.out.println("execute");
-      System.out.println("execute");
-      System.out.println("execute");
-      System.out.println("execute");
-      System.out.println("execute");
-      System.out.println("execute");
-      System.out.println("execute");
     } catch (BuildException exception) {
       String message = "ExecTask failure executable=" + executableCopy 
       + "\narguments=" + argsCopy;
