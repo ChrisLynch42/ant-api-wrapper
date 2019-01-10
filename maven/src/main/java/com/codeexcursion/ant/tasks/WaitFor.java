@@ -97,6 +97,11 @@ public class WaitFor extends org.apache.tools.ant.taskdefs.WaitFor {
   		return this;
     }
     
+    public Builder setFailMessage(String failMessage) {
+      waitFor.setFailMessage(failMessage);
+      return this;
+    }      
+    
     public WaitFor getWaitFor() {
       return waitFor;
     }

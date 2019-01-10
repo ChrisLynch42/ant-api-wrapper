@@ -33,7 +33,7 @@ public class MoveTest {
       .execute();
         
     String filename = destDir + "/test.txt";
-    new Move(project).setFileC(filename).setTodirC(moveDestDir).execute();    
+    new Move.Builder(project).setFile(filename).setTodir(moveDestDir).getMove().execute();    
     
     Assert.assertFalse("File " + filename + " should exist.", Files.exists(Paths.get(filename)));
     filename = moveDestDir + "/test.txt";
@@ -61,7 +61,7 @@ public class MoveTest {
         
     String filename = "test.txt";
     String subFilename = "test/subTest/test4.txt";
-    new Move(project).addFilesetC(destDir, "**/*").setTodirC(moveDestDir).execute();    
+    new Move.Builder(project).addFileset(destDir, "**/*").setTodir(moveDestDir).getMove().execute();    
     
     String filepath = destDir + filename;
     Assert.assertFalse("File " + filename + " should exist.", Files.exists(Paths.get(filepath)));
