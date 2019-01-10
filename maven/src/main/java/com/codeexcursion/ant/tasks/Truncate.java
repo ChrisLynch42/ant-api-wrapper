@@ -5,12 +5,10 @@
  */
 package com.codeexcursion.ant.tasks;
 
+import com.codeexcursion.ant.Project;
 import com.codeexcursion.ant.util.PathsUtil;
 
-import java.io.File;
 import java.util.Optional;
-
-import org.apache.tools.ant.Project;
 
 /**
  * Defaults to create(false).

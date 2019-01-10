@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.codeexcursion.ant.tasks;
+import com.codeexcursion.ant.Project;
 import com.codeexcursion.ant.TestHelper;
 import com.codeexcursion.ant.filters.TokenFilter;
 import com.codeexcursion.ant.tasks.condition.FilesMatch;
@@ -14,7 +15,6 @@ import java.nio.file.Paths;
 import java.util.Optional;
 
 import org.junit.Assert;
-import org.apache.tools.ant.Project;
 import org.apache.tools.ant.filters.StripLineBreaks;
 import org.junit.Test;
 /**

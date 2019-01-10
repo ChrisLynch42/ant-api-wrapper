@@ -5,11 +5,10 @@
  */
 package com.codeexcursion.ant.types;
 
+import com.codeexcursion.ant.Project;
 import com.codeexcursion.ant.util.PathsUtil;
 
 import java.util.Optional;
-
-import org.apache.tools.ant.Project;
 
 /**
  *

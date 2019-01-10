@@ -5,11 +5,9 @@
  */
 package com.codeexcursion.ant.tasks;
 
+import com.codeexcursion.ant.Project;
 import com.codeexcursion.ant.util.PathsUtil;
 
-import java.io.File;
-
-import org.apache.tools.ant.Project;
 
 /**
  * Defaults to overwrite(true) and setForce(true).

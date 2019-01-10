@@ -4,13 +4,11 @@
  * and open the template in the editor.
  */
 package com.codeexcursion.ant.tasks;
+import com.codeexcursion.ant.Project;
 import com.codeexcursion.ant.TestHelper;
 import com.codeexcursion.ant.tasks.condition.FilesMatch;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import org.junit.Assert;
-import org.apache.tools.ant.Project;
 import org.junit.Test;
 /**
  *

@@ -5,6 +5,7 @@
  */
 package com.codeexcursion.ant.tasks;
 
+import com.codeexcursion.ant.Project;
 import com.codeexcursion.ant.util.PathsUtil;
 
 import java.util.ArrayList;
@@ -12,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Project;
 
 /**
  * Defaults to setProperty().
@@ -33,6 +33,7 @@ public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {
    */    
   @Override
   public void execute() {
+    this.logFlush();
     getProject().setProperty(PROPERTY_NAME, null);
     try {
       super.execute();
@@ -49,8 +50,8 @@ public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {
    * call the execute method and return the output.
    * @return Output string.
    */    
-  public String executeOutput() {
-    execute();    
+  public Optional<String> executeOutput() {
+    this.execute();    
     return getOutput();
   }  
   
@@ -80,9 +81,13 @@ public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {
    * Returns the output.
    * @return the output from the executable.
    */ 
-  public String getOutput() {
-    return getProject().getProperty(PROPERTY_NAME);
-  }   
+  public Optional<String> getOutput() {
+    return getProject().getLastValue(PROPERTY_NAME);
+  }
+  
+  public Project getProject() {
+    return (Project)super.getProject();
+  }  
   
   public static class Builder {
     private Execute execute;
@@ -92,6 +97,7 @@ public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {
     ) {
   	  Optional.ofNullable(project).orElseThrow(() -> new BuildException("Task requires a valid project."));
   	  execute = new Execute();
+  	  execute.setupRedirector();
   	  execute.setProject(project);
   	  execute.setOutputproperty(PROPERTY_NAME);
     }
@@ -170,8 +176,7 @@ public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {
       execute.setOutput(PathsUtil.getFile(file));
       return this;
     }    
-  
- 
+      
     public Execute getExecute() {
       return execute;
     }

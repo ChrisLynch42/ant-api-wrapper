@@ -1,8 +1,8 @@
 package com.codeexcursion.ant.tasks;
 
-import java.util.Optional;
+import com.codeexcursion.ant.Project;
 
-import org.apache.tools.ant.Project;
+import java.util.Optional;
 
 public class Sleep extends org.apache.tools.ant.taskdefs.Sleep {
 

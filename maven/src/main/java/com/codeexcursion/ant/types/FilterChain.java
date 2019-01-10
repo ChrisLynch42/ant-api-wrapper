@@ -5,8 +5,6 @@
  */
 package com.codeexcursion.ant.types;
 
-import com.codeexcursion.ant.util.PathsUtil;
-import org.apache.tools.ant.Project;
 import org.apache.tools.ant.filters.ChainableReader;
 
 /**

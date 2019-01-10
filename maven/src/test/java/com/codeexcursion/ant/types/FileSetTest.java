@@ -5,17 +5,15 @@
  */
 package com.codeexcursion.ant.types;
 
+import com.codeexcursion.ant.Project;
 import com.codeexcursion.ant.TestHelper;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.Resource;
 import org.junit.Test;
 import org.junit.Assert;
-import com.codeexcursion.ant.util.PathsUtil;
 import java.util.List;
-import java.io.File;
 
 /**
  *

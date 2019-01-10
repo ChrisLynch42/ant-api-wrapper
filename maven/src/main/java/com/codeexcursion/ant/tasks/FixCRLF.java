@@ -5,11 +5,11 @@
  */
 package com.codeexcursion.ant.tasks;
 
+import com.codeexcursion.ant.Project;
 import com.codeexcursion.ant.util.PathsUtil;
 
 import java.util.Optional;
 
-import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.selectors.FilenameSelector;
 
 /**

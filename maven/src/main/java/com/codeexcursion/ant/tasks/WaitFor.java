@@ -5,14 +5,12 @@
  */
 package com.codeexcursion.ant.tasks;
 
-import java.io.File;
+import com.codeexcursion.ant.Project;
+
 import java.util.Enumeration;
 import java.util.Optional;
 
-import com.codeexcursion.ant.util.PathsUtil;
-
 import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.condition.Condition;
 
 /**

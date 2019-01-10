@@ -7,11 +7,10 @@ package com.codeexcursion.ant.tasks;
 
 import java.util.Optional;
 
-import com.codeexcursion.ant.filters.TokenFilter;
+import com.codeexcursion.ant.Project;
 import com.codeexcursion.ant.util.PathsUtil;
 
 import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.FilterChain;
 
 /**
@@ -29,7 +28,6 @@ public class LoadFile extends org.apache.tools.ant.taskdefs.LoadFile {
    * @return Optional string containing the result.
    */  
   public Optional<String> executeResult() {
-    getProject().setProperty(PROPERTY_NAME, null);
     super.execute();
     return getResult();
   }   
@@ -39,9 +37,13 @@ public class LoadFile extends org.apache.tools.ant.taskdefs.LoadFile {
    * @return Optional string containing the result.
    */  
   public Optional<String> getResult() {
-    return Optional.ofNullable(getProject().getProperty(PROPERTY_NAME));
+    return getProject().getLastValue(PROPERTY_NAME);
   }	
 	
+  
+  public Project getProject() {
+    return (Project)super.getProject();
+  }
 	
 	/**
 	 * Defaults to setProperty("loadFileResult").

@@ -7,10 +7,10 @@ package com.codeexcursion.ant.tasks;
 
 import java.util.Optional;
 
+import com.codeexcursion.ant.Project;
 import com.codeexcursion.ant.util.PathsUtil;
 
 import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Project;
 
 /**
  *
@@ -23,21 +23,24 @@ public class Tstamp extends org.apache.tools.ant.taskdefs.Tstamp {
   private Tstamp() {}
   
   
-  public String executeResult() {
+  public Optional<String> executeResult() {
     getProject().setProperty(PROPERTY_NAME, null);
     super.execute();
     return getResult();
   }
   
-  public String getResult() {
-    return getProject().getProperty(PROPERTY_NAME);
+  public Optional<String> getResult() {
+    return getProject().getLastValue(PROPERTY_NAME);
+  }  
+  
+  public Project getProject() {
+    return (Project)super.getProject();
   }  
   
   /**
   *  Defaults to setProperty(PROPERTY_NAME)
   * @author chris
-  */
-  
+  */  
   public static class Builder {
     private Tstamp tstamp;
 

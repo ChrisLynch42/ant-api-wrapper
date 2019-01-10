@@ -5,12 +5,11 @@
  */
 package com.codeexcursion.ant.filters;
 
+import com.codeexcursion.ant.Project;
+
 import java.util.Optional;
 
-import com.codeexcursion.ant.util.PathsUtil;
-
 import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Project;
 
 /**
  *
