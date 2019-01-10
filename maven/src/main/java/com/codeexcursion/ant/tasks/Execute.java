@@ -33,8 +33,6 @@ public class Execute extends org.apache.tools.ant.taskdefs.ExecTask {
    */    
   @Override
   public void execute() {
-    this.logFlush();
-    getProject().setProperty(PROPERTY_NAME, null);
     try {
       super.execute();
     } catch (BuildException exception) {
